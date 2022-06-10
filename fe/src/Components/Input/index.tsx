@@ -58,7 +58,11 @@ const Input: ForwardRefExoticComponent<Props> = forwardRef<
           </label>
         )}
         <div className="flex flex-row w-full relative">
-          <span className='w-4 h-4 text-gray-300 absolute left-2 top-1/2 -translate-y-1/2'>{SearchIcon}</span>
+          {search && (
+            <span className="w-4 h-4 text-gray-300 absolute left-2 top-1/2 -translate-y-1/2">
+              {SearchIcon}
+            </span>
+          )}
           <input
             id={name}
             name={name}
@@ -104,7 +108,7 @@ const Input: ForwardRefExoticComponent<Props> = forwardRef<
           <p
             className={classNames(
               "text-xs inline-block",
-              infoType === "danger" ? "text-primary" : "",
+              infoType === "danger" ? "text-red-600" : "",
               infoType === "success" ? "text-green-500" : "",
               infoType === "primary" ? "text-blue-600" : ""
             )}
@@ -113,7 +117,7 @@ const Input: ForwardRefExoticComponent<Props> = forwardRef<
           </p>
         )}
         {error && (
-          <span className="text-sm inline-block text-primary">{error}</span>
+          <span className="text-sm inline-block text-red-600">{error}</span>
         )}
       </div>
     );

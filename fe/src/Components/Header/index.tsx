@@ -32,11 +32,11 @@ export default function Header({}: Props) {
   }
 
   return (
-    <div className="sticky top-0 left-0 right-0 h-16 bg-orange-500 shadow-md flex items-center justify-between px-4 lg:px-24 py-4 z-30">
+    <div className="sticky top-0 left-0 right-0 h-16 space-x-8 bg-orange-500 shadow-md flex items-center justify-between px-4 lg:px-24 py-4 z-30">
       <div className="flex flex-row items-center space-x-8">
         <Link to="/">
           {/* <img src="/logo.png" alt="" width={91} height={40} /> */}
-          <p className="font-bold text-xl text-white">
+          <p className="font-bold text-xl text-white whitespace-nowrap">
             {process.env.REACT_APP_APP_NAME}
           </p>
         </Link>
@@ -47,10 +47,10 @@ export default function Header({}: Props) {
           className="rounded-full text-sm"
         />
       </div>
-      <div className="w-96">
+      <div className="w-full">
         <Input placeholder="Ketik disini untuk mencari.." search />
       </div>
-      <div className="flex flex-row space-x-2 items-center">
+      {/* <div className="flex flex-row space-x-2 items-center">
         <Dropdown
           label="Username"
           items={items}
@@ -62,7 +62,7 @@ export default function Header({}: Props) {
             />
           }
         />
-      </div>
+      </div> */}
       <div className="flex flex-row space-x-4 items-center">
         <Button
           to="/auth/register"

@@ -14,7 +14,7 @@ export default function Layout({}: Props) {
           {/* LEFT SECTION */}
           <div className="border w-2/12">LEFT SECTION</div>
           {/* CONTENT */}
-          <div className="border w-7/12">
+          <div className="w-7/12">
             <Outlet />
           </div>
           {/* RIGHT SECTION */}

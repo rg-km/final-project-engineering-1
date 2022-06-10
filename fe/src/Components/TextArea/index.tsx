@@ -1,22 +1,23 @@
 import {
   forwardRef,
   ForwardRefExoticComponent,
-  InputHTMLAttributes,
+  TextareaHTMLAttributes,
 } from "react";
 import { classNames } from "../../Utils/classNames";
+import { CheckIcon } from "../Icons";
 
-interface Props extends InputHTMLAttributes<HTMLInputElement> {
+interface Props extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: string;
   classContainer?: string;
   info?: string;
   infoType?: "info" | "danger" | "primary" | "success";
   error?: string;
-  filename?:string;
-  checked?:boolean;
-  rows?:number;
+  filename?: string;
+  checked?: boolean;
+  rows?: number;
 }
 const TextArea: ForwardRefExoticComponent<Props> = forwardRef<
-  HTMLInputElement,
+  HTMLTextAreaElement,
   Props
 >(
   (
@@ -26,9 +27,9 @@ const TextArea: ForwardRefExoticComponent<Props> = forwardRef<
       infoType = "info",
       error,
       classContainer = "",
-      filename='',
+      filename = "",
       checked,
-      rows=5,
+      rows = 5,
       ...rest
     },
     ref
@@ -52,7 +53,9 @@ const TextArea: ForwardRefExoticComponent<Props> = forwardRef<
             {...rest}
           />
           {checked && (
-            <span className='h-6 w-6 text-green-400 absolute right-4 top-1/2 -translate-y-1/2 '>{CheckIcon}</span>
+            <span className="h-6 w-6 text-green-400 absolute right-4 top-1/2 -translate-y-1/2 ">
+              {CheckIcon}
+            </span>
           )}
         </div>
         {!error && info && (

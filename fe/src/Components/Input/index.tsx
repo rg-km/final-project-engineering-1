@@ -1,10 +1,10 @@
 import {
   forwardRef,
   ForwardRefExoticComponent,
-  InputHTMLAttributes
+  InputHTMLAttributes,
 } from "react";
 import { classNames } from "../../Utils/classNames";
-import { EyeIcon } from "../Icons";
+import { CheckIcon, EyeIcon, SearchIcon } from "../Icons";
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
@@ -13,8 +13,9 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   info?: string;
   infoType?: "info" | "danger" | "primary" | "success";
   error?: string;
-  filename?:string;
-  checked?:boolean
+  filename?: string;
+  checked?: boolean;
+  search?: boolean;
 }
 const Input: ForwardRefExoticComponent<Props> = forwardRef<
   HTMLInputElement,
@@ -28,8 +29,9 @@ const Input: ForwardRefExoticComponent<Props> = forwardRef<
       infoType = "info",
       error,
       classContainer = "",
-      filename='',
+      filename = "",
       checked,
+      search,
       ...rest
     },
     ref
@@ -50,31 +52,35 @@ const Input: ForwardRefExoticComponent<Props> = forwardRef<
 
     return (
       <div className={classNames("space-y-2", classContainer)}>
-        <label className="inline-block" htmlFor={name}>
-          {label}
-        </label>
+        {label && (
+          <label className="inline-block" htmlFor={name}>
+            {label}
+          </label>
+        )}
         <div className="flex flex-row w-full relative">
+          <span className='w-4 h-4 text-gray-300 absolute left-2 top-1/2 -translate-y-1/2'>{SearchIcon}</span>
           <input
             id={name}
             name={name}
             ref={ref}
             className={classNames(
-              "grow border border-gray-300 p-2 outline-none w-full",
-              type === "password" ? "rounded-l-md" : "rounded-md",
+              "grow border border-gray-300 py-1 outline-none w-full",
+              search ? "pl-8 pr-2" : "px-2",
+              type === "password" ? "rounded-l" : "rounded",
               type === "file" ? "hidden" : ""
             )}
             type={type}
             {...rest}
           />
           {type === "file" && (
-            <div className="grow rounded-l-md border border-gray-300 p-2 outline-none w-full truncate">
-              <p className='truncate'>{filename ? filename : 'Pilih file..'}</p>
+            <div className="grow rounded-l border border-gray-300 p-2 outline-none w-full truncate">
+              <p className="truncate">{filename ? filename : "Pilih file.."}</p>
             </div>
           )}
           {type === "password" && (
             <button
               type="button"
-              className="flex-none p-2 px-3 border border-gray-300 border-l-transparent bg-gray-200 hover:bg-gray-300 rounded-r-md"
+              className="flex-none p-2 px-3 border border-gray-300 border-l-transparent bg-gray-200 hover:bg-gray-300 rounded-r"
               onClick={togglePassword}
             >
               {EyeIcon}
@@ -82,14 +88,16 @@ const Input: ForwardRefExoticComponent<Props> = forwardRef<
           )}
           {type == "file" && (
             <label
-              className="cursor-pointer select-none flex items-center p-2 px-3 border border-gray-300 border-l-transparent bg-gray-200 hover:bg-gray-300 rounded-r-md"
+              className="cursor-pointer select-none flex items-center p-2 px-3 border border-gray-300 border-l-transparent bg-gray-200 hover:bg-gray-300 rounded-r"
               htmlFor={name}
             >
               browse
             </label>
           )}
           {checked && (
-            <span className='h-6 w-6 text-green-400 absolute right-4 top-1/2 -translate-y-1/2 '>{CheckIcon}</span>
+            <span className="h-6 w-6 text-green-400 absolute right-4 top-1/2 -translate-y-1/2 ">
+              {CheckIcon}
+            </span>
           )}
         </div>
         {!error && info && (

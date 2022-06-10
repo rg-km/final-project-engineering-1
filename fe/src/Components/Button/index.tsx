@@ -49,7 +49,7 @@ export default function Button({
           basic ? "bg-[#F8F9FA] hover:bg-gray-300" : "",
           white ? "bg-white text-black hover:bg-primary-light" : "",
           primary ? "hover:bg-primary-light" : "",
-          danger ? "bg-primary hover:bg-red-700" : "hover:bg-primary-light",
+          danger ? "bg-primary hover:bg-orange-700" : "hover:bg-primary-light",
           success ? "bg-success hover:bg-green-700" : "hover:bg-primary-light",
           className.includes("rounded") ? className : "rounded",
           className
@@ -84,7 +84,7 @@ export default function Button({
         basic ? "bg-[#F8F9FA] hover:bg-gray-300" : "",
         white ? "bg-white text-black hover:bg-primary-light" : "",
         primary ? "hover:bg-primary-light" : "",
-        danger ? "bg-primary hover:bg-red-700" : "hover:bg-primary-light",
+        danger ? "bg-primary hover:bg-orange-700" : "hover:bg-primary-light",
         success ? "bg-success hover:bg-green-700" : "hover:bg-primary-light",
         className.includes("rounded") ? className : "rounded",
         className

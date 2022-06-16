@@ -32,53 +32,39 @@ export default function Register({}: Props) {
           <div className="bg-orange-800/30 absolute inset-0" />
           <div className="hidden md:block absolute space-y-4 left-12 right-12">
             <h1 className="font-bold text-3xl text-white">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+              Forum Ruangguru CAMP
             </h1>
             <p className="font-bold text-white">
-              Quod enim, incidunt vero rerum cum molestias nemo
+              Forum yang dapat digunakan untuk mendiskusikan lebih lanjut mengenai materi yang ada
             </p>
           </div>
           <div className="absolute w-24 h-auto bottom-12 left-12">
             {/* <img src="/logo-white.png" alt="" /> */}
-            <h1 className="font-bold text-4xl text-white">LOGO</h1>
+            {/* <h1 className="font-bold text-4xl text-white">LOGO</h1> */}
           </div>
         </div>
       </div>
       <div />
-      {/* Login Form */}
-      <div className="relative h-full flex items-center justify-center">
+      {/* Register Form */}
+      <div className="relative h-full flex items-center justify-end">
         <div className="bg-white rounded shadow w-full border m-4 md:my-24 md:mx-12 p-8">
           <div className="mb-8">
             <h1 className="text-2xl font-bold text-primary text-center">
               REGISTRASI
             </h1>
-            <p className="text-center font-medium text-black">
+            {/* <p className="text-center font-medium text-black">
               Silahkan lengkapi seluruh data di bawah ini
-            </p>
+            </p> */}
           </div>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
             <div className="flex flex-row items-center space-x-8">
               <div className="w-1/2">
-                <Input label="NIK" />
-              </div>
-              <div className="w-1/2">
-                <Input label="Nomor KK" />
-              </div>
-            </div>
-            <div className="flex flex-row items-center space-x-8">
-              <div className="w-1/2">
-                <Input label="Nomor Ponsel" />
-              </div>
-              <div className="w-1/2">
-                <Input label="Email" />
-              </div>
-            </div>
-            <div className="flex flex-row items-center space-x-8">
-              <div className="w-1/2">
                 <Input label="Nama Lengkap" />
               </div>
+            </div>
+            <div className="flex flex-row items-center space-x-8">
               <div className="w-1/2">
-                <Input label="Username" />
+                <Input label="Email" />
               </div>
             </div>
             <div className="flex flex-row items-center space-x-8">
@@ -89,29 +75,21 @@ export default function Register({}: Props) {
                   info="Minimal 8 karakter"
                 />
               </div>
-              <div className="w-1/2">
+              {/* <div className="w-1/2">
                 <Input
                   label="Ulangi Password"
                   type="password"
                   info="Minimal 8 karakter"
                 />
-              </div>
+              </div> */}
             </div>
-            <div className="">
-              <Checkbox
-                danger
-                label={`Dengan ini saya menyetujui kebijakan dari ${process.env.REACT_APP_APP_NAME}`}
-              />
-            </div>
-            <Button danger label="Kirim Registrasi" block bold />
+            <Button danger label="Daftar" block bold />
             <div className="flex flex-row items-center justify-between text-sm">
-              <span>Sudah memiliki akun?</span>
               <Link
                 to="/auth/login"
                 className="space-x-1 flex flex-row items-center text-primary hover:text-red-700"
               >
-                <span>Login</span>
-                {DoubleChevronIcon}
+                <span>Sudah memiliki akun? Sign In</span>
               </Link>
             </div>
           </form>

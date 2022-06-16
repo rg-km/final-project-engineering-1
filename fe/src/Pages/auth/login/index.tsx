@@ -95,7 +95,7 @@ export default function Login({}: Props) {
   return (
     <>
       <Helmet>
-        <title>Login - Unique Digital Identity</title>
+        <title>Login</title>
         <meta
           name="description"
           content="Login - Your Unique Digital Identity"
@@ -113,15 +113,15 @@ export default function Login({}: Props) {
             <div className="bg-orange-800/30 absolute inset-0" />
             <div className="hidden md:block absolute space-y-4 left-12 right-12">
               <h1 className="font-bold text-3xl text-white">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+              Forum Ruangguru CAMP
               </h1>
               <p className="font-bold text-white">
-                Quod enim, incidunt vero rerum cum molestias nemo
+              Forum yang dapat digunakan untuk mendiskusikan lebih lanjut mengenai materi yang ada
               </p>
             </div>
             <div className="absolute w-24 h-auto bottom-12 left-12">
               {/* <img src="/logo-white.png" alt="" /> */}
-              <h1 className='font-bold text-4xl text-white'>LOGO</h1>
+              {/* <h1 className='font-bold text-4xl text-white'>LOGO</h1> */}
             </div>
           </div>
         </div>
@@ -133,9 +133,9 @@ export default function Login({}: Props) {
               <h1 className="text-2xl font-bold text-primary text-center">
                 MASUK
               </h1>
-              <p className="text-center font-medium text-black">
+              {/* <p className="text-center font-medium text-black">
                 Silahkan isi informasi dibawah ini untuk masuk.
-              </p>
+              </p> */}
             </div>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
               <Input
@@ -149,23 +149,21 @@ export default function Login({}: Props) {
                 {...register("password")}
                 error={errors.password?.message}
               />
-              <div className="flex flex-row items-center justify-end">
+              {/* <div className="flex flex-row items-center justify-end">
                 <Link
                   to="/auth/forgot-password"
                   className="text-primary hover:text-red-700 text-sm"
                 >
                   Lupa sandi?
                 </Link>
-              </div>
+              </div> */}
               <Button danger label="Masuk" block bold />
               <div className="flex flex-row items-center justify-between text-sm">
-                <span>Belum memiliki akun?</span>
                 <Link
                   to="/auth/register"
                   className="space-x-1 flex flex-row items-center text-primary hover:text-red-700"
                 >
-                  <span>Buat Akun</span>
-                  {DoubleChevronIcon}
+                  <span>Belum memiliki akun? Sign Up</span>
                 </Link>
               </div>
             </form>

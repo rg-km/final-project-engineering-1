@@ -36,7 +36,7 @@ INSERT INTO users(username, password, email) VALUES
 		id integer  PRIMARY KEY AUTOINCREMENT NOT NULL,
 		title varchar(255) not null,
 		deskripsi varchar(255) not null,
-		path_image varchar(255) not null
+		path_image varchar(255) not null,
 );
 
 INSERT INTO contents(title, deskripsi, path_image) VALUES

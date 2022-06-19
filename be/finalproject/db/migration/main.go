@@ -34,17 +34,13 @@ INSERT INTO users(username, password, email) VALUES
 	_, err = db.Exec(`
 	CREATE TABLE IF NOT EXISTS contents (
 		id integer  PRIMARY KEY AUTOINCREMENT NOT NULL,
-		id_user integer not null,
-		id_category integer not null,
 		title varchar(255) not null,
 		deskripsi varchar(255) not null,
-		path_image varchar(255) not null,
-		last_modified varchar(255) null
+		path_image varchar(255) not null
 );
 
-INSERT INTO contents(id_user, id_category, title, deskripsi, path_image, last_modified) VALUES
-		(12, "1", "Backend", "Backend blablabla", "public/images/backend.jpg", "112412"),
-		(14, "1", "Frontend", "Frontend blablabla", "public/images/frontend.jpg", "12312");`)
+INSERT INTO contents(title, deskripsi, path_image) VALUES
+		("Backend", "Backend blablabla", "public/images/backend.jpg");`)
 
 	if err != nil {
 		panic(err)
@@ -66,5 +62,10 @@ INSERT INTO category(name, status) VALUES
 		panic(err)
 	}
 
+	// sqlStmt := `DROP TABLE contents;`
+	// _, err = db.Exec(sqlStmt)
+	// if err != nil {
+	// 	panic(err)
+	// }
 
 }

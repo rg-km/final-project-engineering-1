@@ -43,8 +43,8 @@ func main() {
 
 	api.POST("/content", contentHandler.SaveContent)
 
-	api.POST("/category", categoryHandler.SaveCategory)
-	api.GET("/category", categoryHandler.FetchAllCategories)
+	api.POST("/categories", categoryHandler.SaveCategory)
+	api.GET("/categories", categoryHandler.FetchAllCategories)
 
 	router.Run(":8082")
 

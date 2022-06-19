@@ -4,7 +4,6 @@ import (
 	"database/sql"
 	"finalproject/auth"
 	"finalproject/category"
-	"finalproject/content"
 	"finalproject/handler"
 	usercamp "finalproject/user"
 	"fmt"
@@ -27,9 +26,9 @@ func main() {
 	userService := usercamp.NewService(userRepository)
 	userHandler := handler.NewUserHandler(userService, auth.NewService())
 
-	contentRepository := content.NewRepository(db)
-	contentService := content.NewService(contentRepository)
-	contentHandler := handler.NewContentHandler(contentService)
+	// contentRepository := content.NewRepository(db)
+	// contentService := content.NewService(contentRepository)
+	// contentHandler := handler.NewContentHandler(contentService)
 
 	categoryRepository := category.NewRepository(db)
 	categoryService := category.NewService(categoryRepository)
@@ -41,7 +40,7 @@ func main() {
 	api.POST("/register", userHandler.RegisterUser)
 	api.POST("/login", userHandler.Login)
 
-	api.POST("/content", contentHandler.SaveContent)
+	// api.POST("/content", contentHandler.SaveContent)
 
 	api.POST("/category", categoryHandler.SaveCategory)
 	api.GET("/category", categoryHandler.FetchAllCategories)

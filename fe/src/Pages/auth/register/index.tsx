@@ -5,20 +5,68 @@ import { DoubleChevronIcon } from "../../../Components/Icons";
 import Input from "../../../Components/Input";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
+import { toast } from "react-toastify";
+import useStore from "../../../store/store";
+import { useEffect } from "react";
+import { Axios } from "../../../api";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
 type Props = {};
 
-export default function Register({}: Props) {
-  const navigate = useNavigate();
-  const { handleSubmit } = useForm();
+type Values = {
+  name: string;
+  password: string;
+  email: string;
+};
 
-  const onSubmit = (data: any) => {
-    Swal.fire({
-      title: "Registrasi berhasil",
-      text: "Silahkan login untuk melanjutkan",
-      icon: "success",
-    }).then(() => navigate("/auth/login"));
+const schema = yup
+  .object()
+  .shape({
+    name: yup.string().required(),
+    email: yup.string().email().required(),
+    password: yup.string().min(8).required(),
+  })
+  .required();
+
+export default function Register({}: Props) {
+  const { setIsLoading } = useStore();
+  const navigate = useNavigate();
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm<Values>({
+    mode: "onBlur",
+    resolver: yupResolver(schema),
+  });
+
+  const onSubmit = (data: Values) => {
+    setIsLoading(true);
+    Axios.post("/register", data)
+      .then(() => {
+        Swal.fire({
+          title: "Registrasi berhasil",
+          text: "Silahkan login untuk melanjutkan",
+          icon: "success",
+        }).then(() => navigate("/auth/login"));
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+        Swal.fire({
+          title: "Registrasi gagal",
+          text: err.response.data.meta.message,
+          icon: "error",
+        });
+      })
+      .finally(() => setIsLoading(false));
   };
+
+  useEffect(() => {
+    setIsLoading(false);
+    return () => setIsLoading(true);
+  }, []);
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2">
       {/* Banner */}
@@ -39,10 +87,6 @@ export default function Register({}: Props) {
               mengenai materi yang ada.
             </p>
           </div>
-          <div className="absolute w-24 h-auto bottom-12 left-12">
-            {/* <img src="/logo-white.png" alt="" /> */}
-            {/* <h1 className="font-bold text-4xl text-white">LOGO</h1> */}
-          </div>
         </div>
       </div>
       <div />
@@ -53,14 +97,25 @@ export default function Register({}: Props) {
             <h1 className="text-2xl font-bold text-primary text-center">
               REGISTRASI
             </h1>
-            {/* <p className="text-center font-medium text-black">
-              Silahkan lengkapi seluruh data di bawah ini
-            </p> */}
           </div>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
-            <Input label="Nama Lengkap" />
-            <Input label="Email" />
-            <Input label="Password" type="password" info="Minimal 8 karakter" />
+            <Input
+              label="Nama Lengkap"
+              {...register("name")}
+              error={errors.name?.message}
+            />
+            <Input
+              label="Email"
+              {...register("email")}
+              error={errors.email?.message}
+            />
+            <Input
+              label="Password"
+              type="password"
+              info="Minimal 8 karakter"
+              {...register("password")}
+              error={errors.password?.message}
+            />
             <Button primary label="Daftar" block bold />
             <div className="flex flex-row items-center justify-between text-sm">
               <Link

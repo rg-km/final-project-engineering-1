@@ -35,7 +35,8 @@ export default function Register({}: Props) {
               Forum Ruangguru CAMP
             </h1>
             <p className="font-bold text-white">
-              Forum yang dapat digunakan untuk mendiskusikan lebih lanjut mengenai materi yang ada.
+              Forum yang dapat digunakan untuk mendiskusikan lebih lanjut
+              mengenai materi yang ada.
             </p>
           </div>
           <div className="absolute w-24 h-auto bottom-12 left-12">
@@ -57,26 +58,10 @@ export default function Register({}: Props) {
             </p> */}
           </div>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
-            <div className="flex flex-row items-center space-x-8">
-              <div className="w-5/2">
-                <Input label="Nama Lengkap" />
-              </div>
-            </div>
-            <div className="flex flex-row items-center space-x-8">
-              <div className="w-5/2">
-                <Input label="Email" />
-              </div>
-            </div>
-            <div className="flex flex-row items-center space-x-8">
-              <div className="w-5/2">
-                <Input
-                  label="Password"
-                  type="password"
-                  info="Minimal 8 karakter"
-                />
-              </div>
-            </div>
-            <Button danger label="Daftar" block bold />
+            <Input label="Nama Lengkap" />
+            <Input label="Email" />
+            <Input label="Password" type="password" info="Minimal 8 karakter" />
+            <Button primary label="Daftar" block bold />
             <div className="flex flex-row items-center justify-between text-sm">
               <Link
                 to="/auth/login"

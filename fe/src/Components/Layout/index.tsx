@@ -21,7 +21,13 @@ export default function Layout({}: Props) {
         <div className="flex flex-row space-x-14">
           {/* LEFT SECTION */}
           {!location.pathname.includes("/auth") && (
-            <div className="border w-2/12">LEFT SECTION</div>
+            <div className="border w-2/12 px-8 py-5 space-y-4 text-justify p-10">
+              <strong>Forum</strong>
+              <h1></h1>
+              <strong>Tags</strong>
+              <h1></h1>
+              <strong>Video</strong>
+            </div>
           )}
           {/* CONTENT */}
           <div
@@ -33,7 +39,11 @@ export default function Layout({}: Props) {
           </div>
           {/* RIGHT SECTION */}
           {!location.pathname.includes("/auth") && (
-            <div className="border w-3/12">RIGHT SECTION</div>
+            <div className="border flex-auto space-y-4 w-2 py-3 px-5 text-justify">
+              <strong>Selamat Datang CAMP!</strong>
+              <p>Ikuti Instagram kami untuk update terbaru.</p>
+              <p>Setelah membuat pertanyaan, kamu bisa copy-paste link pertanyaan kamu ke grup Discord untuk memberi tahu para member di grup tersebut.</p>
+            </div>
           )}
         </div>
       </div>

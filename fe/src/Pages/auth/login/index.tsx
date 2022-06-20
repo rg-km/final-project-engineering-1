@@ -73,29 +73,29 @@ export default function Login({}: Props) {
     //       Axios.get("/profile")
     //         .then((res) => {
     //           setUser(res.data.data);
-              toast.success("Berhasil login", { theme: "colored" });
-              navigate("/");
-      //       })
-      //       .catch((err) => {
-      //         const response = err.response;
-      //         console.log(response);
-      //         toast.error("Failed to get data profile", { theme: "colored" });
-      //         setIsLoading(false);
-      //       });
-      //   }
-      // })
-      // .catch((err) => {
-      //   const response = err.response;
-      //   console.log(response);
-      //   toast.error("Email atau password salah", { theme: "colored" });
-      //   setIsLoading(false);
-      // });
+    toast.success("Berhasil login", { theme: "colored" });
+    navigate("/");
+    //       })
+    //       .catch((err) => {
+    //         const response = err.response;
+    //         console.log(response);
+    //         toast.error("Failed to get data profile", { theme: "colored" });
+    //         setIsLoading(false);
+    //       });
+    //   }
+    // })
+    // .catch((err) => {
+    //   const response = err.response;
+    //   console.log(response);
+    //   toast.error("Email atau password salah", { theme: "colored" });
+    //   setIsLoading(false);
+    // });
   };
 
   return (
     <>
       <Helmet>
-        <title>Login - Unique Digital Identity</title>
+        <title>Login</title>
         <meta
           name="description"
           content="Login - Your Unique Digital Identity"
@@ -113,29 +113,30 @@ export default function Login({}: Props) {
             <div className="bg-primary/30 absolute inset-0" />
             <div className="hidden md:block absolute space-y-4 left-12 right-12">
               <h1 className="font-bold text-3xl text-white">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                Forum Ruangguru CAMP
               </h1>
               <p className="font-bold text-white">
-                Quod enim, incidunt vero rerum cum molestias nemo
+                Forum yang dapat digunakan untuk mendiskusikan lebih lanjut
+                mengenai materi yang ada
               </p>
             </div>
             <div className="absolute w-24 h-auto bottom-12 left-12">
               {/* <img src="/logo-white.png" alt="" /> */}
-              <h1 className='font-bold text-4xl text-white'>LOGO</h1>
+              {/* <h1 className='font-bold text-4xl text-white'>LOGO</h1> */}
             </div>
           </div>
         </div>
         <div />
         {/* Login Form */}
         <div className="relative min-h-screen h-full flex items-center justify-center">
-          <div className="bg-white rounded shadow w-full border m-4 lg:m-24 p-8">
+          <div className="bg-white rounded shadow w-full border m-4 lg:m-36 p-8">
             <div className="mb-8">
               <h1 className="text-2xl font-bold text-primary text-center">
                 MASUK
               </h1>
-              <p className="text-center font-medium text-black">
+              {/* <p className="text-center font-medium text-black">
                 Silahkan isi informasi dibawah ini untuk masuk.
-              </p>
+              </p> */}
             </div>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
               <Input
@@ -159,13 +160,11 @@ export default function Login({}: Props) {
               </div>
               <Button primary label="Masuk" block bold />
               <div className="flex flex-row items-center justify-between text-sm">
-                <span>Belum memiliki akun?</span>
                 <Link
                   to="/auth/register"
                   className="space-x-1 flex flex-row items-center text-primary hover:text-primary-dark"
                 >
-                  <span>Buat Akun</span>
-                  {DoubleChevronIcon}
+                  <span>Belum memiliki akun? Sign Up</span>
                 </Link>
               </div>
             </form>

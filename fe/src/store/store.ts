@@ -43,7 +43,7 @@ export interface User {
   };
 }
 
-interface LoadingState {
+interface StoreState {
   isLoading: Boolean;
   setIsLoading: (isLoading: Boolean) => void;
   isLogin: Boolean;
@@ -52,7 +52,7 @@ interface LoadingState {
   setUser: (user: User | null) => void;
 }
 
-const useStore = create<LoadingState>((set) => ({
+const useStore = create<StoreState>((set) => ({
   isLoading: true,
   setIsLoading: (loading: Boolean) => set((state) => ({ isLoading: loading })),
   isLogin: false,

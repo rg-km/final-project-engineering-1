@@ -11,21 +11,9 @@ import Cookies from "js-cookie";
 import { DoubleChevronIcon } from "../../../Components/Icons";
 import { Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import Swal from "sweetalert2";
 
 type Props = {};
-
-type Data = {
-  message: string;
-  success: boolean;
-  data: {
-    access_token: string;
-    expires_in: number;
-    kittens: string;
-    prev: string;
-    refresh_token: string;
-    token_type: string;
-  };
-};
 
 type Values = {
   email: string;
@@ -33,15 +21,12 @@ type Values = {
 };
 
 const schema = yup.object({
-  email: yup
-    .string()
-    .email("Format email tidak valid")
-    .required("Email tidak boleh kosong"),
-  password: yup.string().required("Password tidak boleh kosong"),
+  email: yup.string().email().required(),
+  password: yup.string().required(),
 });
 
 export default function Login({}: Props) {
-  const { setIsLoading, setUser } = useStore();
+  const { setIsLoading } = useStore();
   const {
     register,
     handleSubmit,
@@ -53,43 +38,24 @@ export default function Login({}: Props) {
   const navigate = useNavigate();
 
   const onSubmit = (data: Values) => {
-    const { email, password } = data;
-    if (!email)
-      return toast.error("Email tidak boleh kosong", { theme: "colored" });
-    if (!password)
-      return toast.error("Password tidak boleh kosong", { theme: "colored" });
-    const formData = new FormData();
-    formData.append("email", email);
-    formData.append("password", password);
     setIsLoading(true);
-    // Axios.post("/login", formData)
-    //   .then((res) => {
-    //     const response: Data = res.data;
-    //     if (response.success) {
-    //       Cookies.set(
-    //         "token",
-    //         `${response.data.token_type} ${response.data.access_token}`
-    //       );
-    //       Axios.get("/profile")
-    //         .then((res) => {
-    //           setUser(res.data.data);
-    toast.success("Berhasil login", { theme: "colored" });
-    navigate("/");
-    //       })
-    //       .catch((err) => {
-    //         const response = err.response;
-    //         console.log(response);
-    //         toast.error("Failed to get data profile", { theme: "colored" });
-    //         setIsLoading(false);
-    //       });
-    //   }
-    // })
-    // .catch((err) => {
-    //   const response = err.response;
-    //   console.log(response);
-    //   toast.error("Email atau password salah", { theme: "colored" });
-    //   setIsLoading(false);
-    // });
+    Axios.post("/login", data)
+      .then((res) => {
+        const {token} = res.data.data;
+        Cookies.set("token", token);
+        toast.success("Success login");
+        navigate('/')
+      })
+      .catch((err) => {
+        const response = err.response;
+        console.log(response);
+        Swal.fire({
+          title: "Email atau password salah",
+          text: "Silahkan coba kembali",
+          icon: "error",
+        });
+      })
+      .finally(() => setIsLoading(false));
   };
 
   useEffect(() => {

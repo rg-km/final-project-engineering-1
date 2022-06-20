@@ -11,14 +11,14 @@ type Menu = {
 
 export default function Footer({}: Props) {
   return (
-    <div className="bg-orange-500">
+    <div className="bg-primary-light">
       <div className="h-16 bg-primary flex text-center justify-center items-center">
         <p className="text-white space-x-1">
+          <span>Copyright</span>
+          <span>&copy; {new Date().getFullYear()}</span>
           <Link to="/" className="text-white">
-            U.id
+            {process.env.REACT_APP_APP_NAME}
           </Link>
-          <span>&copy; {new Date().getFullYear()} | powered by</span>
-          <Link to="/">{process.env.REACT_APP_APP_NAME}</Link>
         </p>
       </div>
     </div>

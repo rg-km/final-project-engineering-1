@@ -73,23 +73,23 @@ export default function Login({}: Props) {
     //       Axios.get("/profile")
     //         .then((res) => {
     //           setUser(res.data.data);
-              toast.success("Berhasil login", { theme: "colored" });
-              navigate("/");
-      //       })
-      //       .catch((err) => {
-      //         const response = err.response;
-      //         console.log(response);
-      //         toast.error("Failed to get data profile", { theme: "colored" });
-      //         setIsLoading(false);
-      //       });
-      //   }
-      // })
-      // .catch((err) => {
-      //   const response = err.response;
-      //   console.log(response);
-      //   toast.error("Email atau password salah", { theme: "colored" });
-      //   setIsLoading(false);
-      // });
+    toast.success("Berhasil login", { theme: "colored" });
+    navigate("/");
+    //       })
+    //       .catch((err) => {
+    //         const response = err.response;
+    //         console.log(response);
+    //         toast.error("Failed to get data profile", { theme: "colored" });
+    //         setIsLoading(false);
+    //       });
+    //   }
+    // })
+    // .catch((err) => {
+    //   const response = err.response;
+    //   console.log(response);
+    //   toast.error("Email atau password salah", { theme: "colored" });
+    //   setIsLoading(false);
+    // });
   };
 
   return (
@@ -110,13 +110,14 @@ export default function Login({}: Props) {
               alt=""
               className="absolute inset-0 w-full h-full object-cover"
             />
-            <div className="bg-orange-800/30 absolute inset-0" />
+            <div className="bg-primary/30 absolute inset-0" />
             <div className="hidden md:block absolute space-y-4 left-12 right-12">
               <h1 className="font-bold text-3xl text-white">
-              Forum Ruangguru CAMP
+                Forum Ruangguru CAMP
               </h1>
               <p className="font-bold text-white">
-              Forum yang dapat digunakan untuk mendiskusikan lebih lanjut mengenai materi yang ada
+                Forum yang dapat digunakan untuk mendiskusikan lebih lanjut
+                mengenai materi yang ada
               </p>
             </div>
             <div className="absolute w-24 h-auto bottom-12 left-12">
@@ -149,19 +150,19 @@ export default function Login({}: Props) {
                 {...register("password")}
                 error={errors.password?.message}
               />
-              {/* <div className="flex flex-row items-center justify-end">
+              <div className="flex flex-row items-center justify-end">
                 <Link
                   to="/auth/forgot-password"
-                  className="text-primary hover:text-red-700 text-sm"
+                  className="text-primary hover:text-primary-dark text-sm"
                 >
                   Lupa sandi?
                 </Link>
-              </div> */}
-              <Button danger label="Masuk" block bold />
+              </div>
+              <Button primary label="Masuk" block bold />
               <div className="flex flex-row items-center justify-between text-sm">
                 <Link
                   to="/auth/register"
-                  className="space-x-1 flex flex-row items-center text-primary hover:text-red-700"
+                  className="space-x-1 flex flex-row items-center text-primary hover:text-primary-dark"
                 >
                   <span>Belum memiliki akun? Sign Up</span>
                 </Link>

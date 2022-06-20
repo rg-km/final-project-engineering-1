@@ -38,9 +38,11 @@ const TextArea: ForwardRefExoticComponent<Props> = forwardRef<
 
     return (
       <div className={classNames("space-y-2", classContainer)}>
-        <label className="inline-block" htmlFor={name}>
-          {label}
-        </label>
+        {label && (
+          <label className="inline-block" htmlFor={name}>
+            {label}
+          </label>
+        )}
         <div className="flex flex-row w-full relative">
           <textarea
             id={name}

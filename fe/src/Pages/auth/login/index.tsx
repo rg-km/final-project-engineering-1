@@ -92,6 +92,11 @@ export default function Login({}: Props) {
     // });
   };
 
+  useEffect(() => {
+    setIsLoading(false);
+    return () => setIsLoading(true);
+  }, []);
+
   return (
     <>
       <Helmet>

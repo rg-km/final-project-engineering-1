@@ -8,6 +8,8 @@ import Detail from "./Pages/Question/Detail";
 import "react-toastify/dist/ReactToastify.css";
 import useStore from "./store/store";
 import Loading from "./Components/Loading";
+import { ToastContainer } from "react-toastify";
+import CreateQuestion from "./Pages/Question/CreateQuestion";
 
 function App() {
   const { isLoading } = useStore();
@@ -17,6 +19,7 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="question">
+            <Route path="create" element={<CreateQuestion/>} />
             <Route path=":id" element={<Detail />} />
           </Route>
           <Route path="*" element={<NotFound />} />
@@ -27,6 +30,7 @@ function App() {
         </Route>
       </Routes>
       {isLoading && <Loading />}
+      <ToastContainer />
     </>
   );
 }

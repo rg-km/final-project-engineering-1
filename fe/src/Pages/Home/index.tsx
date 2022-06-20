@@ -11,6 +11,7 @@ export default function Home({}: Props) {
   useEffect(() => {
     setIsLoading(false);
     return () => setIsLoading(true);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

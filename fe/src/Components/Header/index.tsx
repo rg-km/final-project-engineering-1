@@ -5,11 +5,14 @@ import Cookies from "js-cookie";
 import { Link, useNavigate } from "react-router-dom";
 import Input from "../Input";
 import Dropdown, { Item } from "../Dropdown";
+import { useEffect } from "react";
+import { isExpired, decodeToken } from "react-jwt";
 
 type Props = {};
 
 export default function Header({}: Props) {
-  const { user, setUser } = useStore();
+  const { user } = useStore();
+  const token = Cookies.get("token");
   let navigate = useNavigate();
 
   const items: Item[] = [
@@ -27,9 +30,14 @@ export default function Header({}: Props) {
 
   function handleLogout() {
     Cookies.remove("token");
-    setUser(null);
-    navigate("/");
+    navigate("/auth/login");
   }
+
+  useEffect(() => {
+    if (!user) {
+      handleLogout();
+    }
+  }, [user]);
 
   return (
     <div className="sticky top-0 left-0 right-0 h-16 space-x-8 bg-primary-light shadow-md flex items-center justify-between px-4 lg:px-24 py-4 z-30">
@@ -50,35 +58,32 @@ export default function Header({}: Props) {
       <div className="w-full">
         <Input placeholder="Ketik disini untuk mencari.." search />
       </div>
-      {/* <div className="flex flex-row space-x-2 items-center">
-        <Dropdown
-          label="Username"
-          items={items}
-          leftIcon={
-            <img
-              src={user?.photo || "/avatar.png"}
-              alt=""
-              className="h-6 w-6"
-            />
-          }
-        />
-      </div> */}
-      <div className="flex flex-row space-x-4 items-center">
-        <Button
-          to="/auth/register"
-          label="Buat Akun"
-          primary
-          className="rounded-full text-sm"
-        />
-        <Button
-          to="/auth/login"
-          label="Masuk"
-          primary
-          className="rounded-full text-sm"
-          icon={ArrowRightIcon}
-          iconPlacement="right"
-        />
-      </div>
+      {user && user.username ? (
+        <div className="flex flex-row space-x-2 items-center">
+          <Dropdown
+            label={user.username}
+            items={items}
+            leftIcon={<img src={"/avatar.png"} alt="" className="h-6 w-6" />}
+          />
+        </div>
+      ) : (
+        <div className="flex flex-row space-x-4 items-center">
+          <Button
+            to="/auth/register"
+            label="Buat Akun"
+            primary
+            className="rounded-full text-sm"
+          />
+          <Button
+            to="/auth/login"
+            label="Masuk"
+            primary
+            className="rounded-full text-sm"
+            icon={ArrowRightIcon}
+            iconPlacement="right"
+          />
+        </div>
+      )}
     </div>
   );
 }

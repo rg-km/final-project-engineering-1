@@ -26,7 +26,7 @@ const schema = yup.object({
 });
 
 export default function Login({}: Props) {
-  const { setIsLoading } = useStore();
+  const { setIsLoading, setUser } = useStore();
   const {
     register,
     handleSubmit,
@@ -44,6 +44,7 @@ export default function Login({}: Props) {
         const {token} = res.data.data;
         Cookies.set("token", token);
         toast.success("Success login");
+        setUser(res.data.data)
         navigate('/')
       })
       .catch((err) => {

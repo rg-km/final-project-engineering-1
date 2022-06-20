@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Comments from "../../Components/Comments/Comments";
 import { ChatIcon, LikeIcon } from "../../Components/Icons";
+import useStore from "../../store/store";
 
 type Props = {};
 
 export default function Detail({}: Props) {
+  const { setIsLoading } = useStore();
+
+  useEffect(() => {
+    setIsLoading(false);
+    return () => setIsLoading(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <div className="space-y-4 divide-y">
       {/* Question */}
@@ -43,15 +51,15 @@ export default function Detail({}: Props) {
         <div className="flex flex-row items-center space-x-2">
           <div className="flex flex-row space-x-2 items-center justify-end text-lg">
             <p className="h-6 w-6">{LikeIcon}</p>
-            <p className='text-sm'>1</p>
+            <p className="text-sm">1</p>
           </div>
           <div className="flex flex-row space-x-2 items-center justify-end text-lg">
             <p className="h-6 w-6  rotate-180">{LikeIcon}</p>
-            <p className='text-sm'>1</p>
+            <p className="text-sm">1</p>
           </div>
           <div className="flex flex-row space-x-2 items-center justify-end text-lg">
             <p className="h-6 w-6">{ChatIcon}</p>
-            <p className='text-sm'>1</p>
+            <p className="text-sm">1</p>
           </div>
         </div>
       </div>

@@ -1,5 +1,4 @@
 import { Outlet, useLocation } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
 import { classNames } from "../../Utils/classNames";
 import Footer from "../Footer";
 import Header from "../Header";
@@ -58,7 +57,6 @@ export default function Layout({}: Props) {
         </div>
       </div>
       {!location.pathname.includes("/auth") && <Footer />}
-      <ToastContainer />
     </div>
   );
 }

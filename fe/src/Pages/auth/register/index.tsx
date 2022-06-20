@@ -22,7 +22,7 @@ export default function Register({}: Props) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2">
       {/* Banner */}
-      <div className="fixed w-full md:w-1/2 left-0 top-0 bottom-0 z-[-1]">
+      <div className="fixed md:relative w-full left-0 top-0 bottom-0 z-[-1]">
         <div className="relative min-h-screen h-full px-8 py-12">
           <img
             src="/banner.jpg"
@@ -45,10 +45,9 @@ export default function Register({}: Props) {
           </div>
         </div>
       </div>
-      <div />
       {/* Register Form */}
-      <div className="relative h-full flex items-center justify-end">
-        <div className="bg-white rounded shadow w-full border m-4 lg:m-36 p-8">
+      <div className="relative w-full flex items-center justify-center">
+        <div className="bg-white rounded shadow w-full border m-4 lg:m-24 p-8">
           <div className="mb-8">
             <h1 className="text-2xl font-bold text-primary text-center">
               REGISTRASI

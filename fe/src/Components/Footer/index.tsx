@@ -11,7 +11,7 @@ type Menu = {
 
 export default function Footer({}: Props) {
   return (
-    <div className="bg-orange-500">
+    <div className="bg-primary-light">
       <div className="h-16 bg-primary flex text-center justify-center items-center">
         <p className="text-white space-x-1">
           <Link to="/" className="text-white">

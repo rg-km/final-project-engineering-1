@@ -47,9 +47,9 @@ export default function Button({
         className={classNames(
           "flex flex-row items-center justify-center space-x-2 px-3 py-2",
           basic ? "bg-[#F8F9FA] hover:bg-gray-300" : "",
-          white ? "bg-white text-black hover:bg-red-500" : "",
-          primary ? "hover:bg-red-500" : "",
-          danger ? "bg-orange-600 hover:bg-orange-700" : "",
+          white ? "bg-white text-black hover:bg-primary-light" : "",
+          danger ? "bg-red-600 hover:bg-red-700" : "",
+          primary ? "bg-primary hover:bg-primary-dark" : "",
           success ? "bg-success hover:bg-green-700" : "",
           className.includes("rounded") ? className : "rounded",
           className
@@ -61,8 +61,8 @@ export default function Button({
         <span
           className={classNames(
             "inline-block text-center whitespace-nowrap",
-            primary ? "text-primary" : "",
-            danger ? "text-white" : "",
+            danger ? "text-red-600" : "",
+            primary ? "text-white" : "",
             success ? "text-white" : "",
             medium ? "font-medium" : "",
             bold ? "font-bold" : "",
@@ -82,9 +82,9 @@ export default function Button({
         "flex flex-row items-center justify-center space-x-2 px-3 py-2",
         block ? "w-full" : "",
         basic ? "bg-[#F8F9FA] hover:bg-gray-300" : "",
-        white ? "bg-white text-black hover:bg-red-500" : "",
-        primary ? "hover:bg-red-500" : "",
-        danger ? "bg-orange-600 hover:bg-orange-700" : "",
+        white ? "bg-white text-black hover:bg-primary-light" : "",
+        danger ? "bg-red-600 hover:bg-red-700" : "",
+        primary ? "bg-primary hover:bg-primary-dark" : "",
         success ? "bg-success hover:bg-green-700" : "",
         className.includes("rounded") ? className : "rounded",
         className
@@ -98,8 +98,8 @@ export default function Button({
       <span
         className={classNames(
           "inline-block text-center whitespace-nowrap",
-          primary ? "text-primary" : "",
-          danger ? "text-white" : "",
+          danger ? "text-red-600" : "",
+          primary ? "text-white" : "",
           success ? "text-white" : "",
           medium ? "font-medium" : "",
           bold ? "font-bold" : "",

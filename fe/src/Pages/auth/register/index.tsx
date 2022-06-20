@@ -29,7 +29,7 @@ export default function Register({}: Props) {
             alt=""
             className="absolute inset-0 w-full h-full object-cover"
           />
-          <div className="bg-orange-800/30 absolute inset-0" />
+          <div className="bg-primary/30 absolute inset-0" />
           <div className="hidden md:block absolute space-y-4 left-12 right-12">
             <h1 className="font-bold text-3xl text-white">
               Lorem ipsum dolor, sit amet consectetur adipisicing elit.
@@ -99,16 +99,16 @@ export default function Register({}: Props) {
             </div>
             <div className="">
               <Checkbox
-                danger
+                primary
                 label={`Dengan ini saya menyetujui kebijakan dari ${process.env.REACT_APP_APP_NAME}`}
               />
             </div>
-            <Button danger label="Kirim Registrasi" block bold />
+            <Button primary label="Kirim Registrasi" block bold />
             <div className="flex flex-row items-center justify-between text-sm">
               <span>Sudah memiliki akun?</span>
               <Link
                 to="/auth/login"
-                className="space-x-1 flex flex-row items-center text-primary hover:text-red-700"
+                className="space-x-1 flex flex-row items-center text-primary hover:text-primary-dark"
               >
                 <span>Login</span>
                 {DoubleChevronIcon}

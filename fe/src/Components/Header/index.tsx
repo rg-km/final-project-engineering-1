@@ -32,7 +32,7 @@ export default function Header({}: Props) {
   }
 
   return (
-    <div className="sticky top-0 left-0 right-0 h-16 space-x-8 bg-orange-500 shadow-md flex items-center justify-between px-4 lg:px-24 py-4 z-30">
+    <div className="sticky top-0 left-0 right-0 h-16 space-x-8 bg-primary-light shadow-md flex items-center justify-between px-4 lg:px-24 py-4 z-30">
       <div className="flex flex-row items-center space-x-8">
         <Link to="/">
           {/* <img src="/logo.png" alt="" width={91} height={40} /> */}
@@ -43,7 +43,7 @@ export default function Header({}: Props) {
         <Button
           to="/about"
           label="Tentang"
-          danger
+          primary
           className="rounded-full text-sm"
         />
       </div>
@@ -67,13 +67,13 @@ export default function Header({}: Props) {
         <Button
           to="/auth/register"
           label="Buat Akun"
-          danger
+          primary
           className="rounded-full text-sm"
         />
         <Button
           to="/auth/login"
           label="Masuk"
-          danger
+          primary
           className="rounded-full text-sm"
           icon={ArrowRightIcon}
           iconPlacement="right"

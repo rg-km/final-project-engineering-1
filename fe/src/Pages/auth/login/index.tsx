@@ -110,7 +110,7 @@ export default function Login({}: Props) {
               alt=""
               className="absolute inset-0 w-full h-full object-cover"
             />
-            <div className="bg-orange-800/30 absolute inset-0" />
+            <div className="bg-primary/30 absolute inset-0" />
             <div className="hidden md:block absolute space-y-4 left-12 right-12">
               <h1 className="font-bold text-3xl text-white">
                 Lorem ipsum dolor, sit amet consectetur adipisicing elit.
@@ -152,17 +152,17 @@ export default function Login({}: Props) {
               <div className="flex flex-row items-center justify-end">
                 <Link
                   to="/auth/forgot-password"
-                  className="text-primary hover:text-red-700 text-sm"
+                  className="text-primary hover:text-primary-dark text-sm"
                 >
                   Lupa sandi?
                 </Link>
               </div>
-              <Button danger label="Masuk" block bold />
+              <Button primary label="Masuk" block bold />
               <div className="flex flex-row items-center justify-between text-sm">
                 <span>Belum memiliki akun?</span>
                 <Link
                   to="/auth/register"
-                  className="space-x-1 flex flex-row items-center text-primary hover:text-red-700"
+                  className="space-x-1 flex flex-row items-center text-primary hover:text-primary-dark"
                 >
                   <span>Buat Akun</span>
                   {DoubleChevronIcon}

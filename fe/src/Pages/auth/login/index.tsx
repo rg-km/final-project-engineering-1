@@ -128,7 +128,7 @@ export default function Login({}: Props) {
         <div />
         {/* Login Form */}
         <div className="relative min-h-screen h-full flex items-center justify-center">
-          <div className="bg-white rounded shadow w-full border m-4 lg:m-24 p-8">
+          <div className="bg-white rounded shadow w-full border m-4 lg:m-36 p-8">
             <div className="mb-8">
               <h1 className="text-2xl font-bold text-primary text-center">
                 MASUK

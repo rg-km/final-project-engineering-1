@@ -4,9 +4,9 @@ import (
 	"database/sql"
 	"finalproject/auth"
 	"finalproject/category"
-	"finalproject/content"
+	// "finalproject/content"
 	"finalproject/handler"
-	usercamp "finalproject/user"
+	usercamp "finalproject/module/user"
 	"fmt"
 	"log"
 
@@ -16,7 +16,7 @@ import (
 
 func main() {
 
-	db, err := sql.Open("sqlite3", "./db/forum-camp1.db")
+	db, err := sql.Open("sqlite3", "./db/forum-camp.db")
 
 	if err != nil {
 		log.Fatal(err.Error())
@@ -27,9 +27,9 @@ func main() {
 	userService := usercamp.NewService(userRepository)
 	userHandler := handler.NewUserHandler(userService, auth.NewService())
 
-	contentRepository := content.NewRepository(db)
-	contentService := content.NewService(contentRepository)
-	contentHandler := handler.NewContentHandler(contentService)
+	// contentRepository := content.NewRepository(db)
+	// contentService := content.NewService(contentRepository)
+	// contentHandler := handler.NewContentHandler(contentService)
 
 	categoryRepository := category.NewRepository(db)
 	categoryService := category.NewService(categoryRepository)
@@ -41,7 +41,7 @@ func main() {
 	api.POST("/register", userHandler.RegisterUser)
 	api.POST("/login", userHandler.Login)
 
-	api.POST("/content", contentHandler.SaveContent)
+	// api.POST("/content", contentHandler.SaveContent)
 
 	api.POST("/categories", categoryHandler.SaveCategory)
 	api.GET("/categories", categoryHandler.FetchAllCategories)

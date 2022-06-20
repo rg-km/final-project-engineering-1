@@ -3,7 +3,7 @@ package handler
 import (
 	"finalproject/auth"
 	"finalproject/helper"
-	usercamp "finalproject/user"
+	usercamp "finalproject/module/user"
 	"net/http"
 
 	"github.com/gin-gonic/gin"

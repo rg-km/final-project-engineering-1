@@ -1,14 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import Button from '../../Components/Button';
 import Input from '../../Components/Input';
 import TextArea from '../../Components/TextArea';
+import useStore from '../../store/store';
 
 type Props = {}
 
 export default function CreateQuestion({}: Props) {
+  const { setIsLoading } = useStore();
 
   const {handleSubmit} = useForm();
   const navigate = useNavigate()
@@ -20,6 +22,12 @@ export default function CreateQuestion({}: Props) {
 
     }).then(() => navigate('/'));
   }
+
+  useEffect(() => {
+    setIsLoading(false);
+    return () => setIsLoading(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="space-y-8">

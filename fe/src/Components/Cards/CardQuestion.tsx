@@ -7,7 +7,7 @@ type Props = {
 
 export default function CardQuestion({id}: Props) {
   return (
-    <Link to={`/question/${id}`}>
+    <Link to={`/question/${id}`} className='block'>
       <div className="border shadow rounded-md p-4">
         <div className="flex flex-row space-x-4">
           {/* Stats */}

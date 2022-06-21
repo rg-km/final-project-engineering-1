@@ -3,6 +3,8 @@ package content
 type Service interface {
 	SaveContent(input FormCreateContentInput, IDUser int) (Content, error)
 	UpdateContent(input FormCreateContentInput, IDUser int, IDContent int64) (Content, error)
+	SaveMedia(ID int64, fileLocation string) (Content, error)
+	SaveMediaid(ID int64, fileLocation string, idcontent int64) (Content, error)
 	FetchAllContents() ([]Content, error)
 }
 
@@ -43,6 +45,39 @@ func (s *service) UpdateContent(input FormCreateContentInput, IDUser int, IDCont
 	}
 
 	return newContent, nil
+}
+
+func (s *service) SaveMedia(ID int64, fileLocation string) (Content, error) {
+	content, err := s.repository.FindByIDContentuser(ID)
+	if err != nil {
+		return content, err
+	}
+	content.IDUser = ID
+	content.Path = fileLocation
+
+	updatedContent, err := s.repository.Update(content)
+	if err != nil {
+		return updatedContent, err
+	}
+
+	return updatedContent, nil
+}
+
+func (s *service) SaveMediaid(ID int64, fileLocation string, idcontent int64) (Content, error) {
+	content, err := s.repository.FindByIDContentuserbyid(ID, idcontent)
+	if err != nil {
+		return content, err
+	}
+	content.IDUser = ID
+	content.ID = idcontent
+	content.Path = fileLocation
+
+	updatedContent, err := s.repository.Update1(content)
+	if err != nil {
+		return updatedContent, err
+	}
+
+	return updatedContent, nil
 }
 
 func (s *service) FetchAllContents() ([]Content, error) {

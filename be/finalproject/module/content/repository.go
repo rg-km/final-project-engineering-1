@@ -8,7 +8,10 @@ import (
 type Repository interface {
 	Save(content Content) (Content, error)
 	SaveUpdate(content Content) (Content, error)
-
+	FindByIDContentuser(ID int64) (Content, error)
+	FindByIDContentuserbyid(ID int64, idcontent int64) (Content, error)
+	Update(content Content) (Content, error)
+	Update1(content Content) (Content, error)
 	FetchAllContent() ([]Content, error)
 }
 
@@ -72,6 +75,74 @@ func (r *repository) SaveUpdate(content Content) (Content, error) {
 	return content, nil
 }
 
+func (r *repository) FindByIDContentuser(ID int64) (Content, error) {
+	var content Content
+
+	var sqlStmt string = "SELECT * FROM contents WHERE iduser= ?"
+
+	row := r.db.QueryRow(sqlStmt, ID)
+	err := row.Scan(
+		&content.ID,
+		&content.Title,
+		&content.Deksripsi,
+		&content.Path,
+		&content.LastModified,
+		&content.IDUser,
+		&content.IDCategory,
+	)
+	if err != nil {
+		return content, err
+	}
+
+	return content, nil
+}
+
+func (r *repository) FindByIDContentuserbyid(ID int64, idcontent int64) (Content, error) {
+	var content Content
+
+	var sqlStmt string = "SELECT * FROM contents WHERE id=? AND iduser=?"
+
+	row := r.db.QueryRow(sqlStmt, idcontent, ID)
+	err := row.Scan(
+		&content.ID,
+		&content.Title,
+		&content.Deksripsi,
+		&content.Path,
+		&content.LastModified,
+		&content.IDUser,
+		&content.IDCategory,
+	)
+	if err != nil {
+		return content, err
+	}
+
+	return content, nil
+}
+func (r *repository) Update(content Content) (Content, error) {
+
+	var sqlStmt string = "UPDATE contents SET path =? WHERE iduser=?"
+
+	_, err := r.db.Exec(sqlStmt, content.Path, content.IDUser)
+
+	if err != nil {
+		return content, err
+	}
+
+	return content, nil
+}
+
+func (r *repository) Update1(content Content) (Content, error) {
+
+	var sqlStmt string = "UPDATE contents SET path =? WHERE iduser=? and id=?"
+
+	_, err := r.db.Exec(sqlStmt, content.Path, content.IDUser, content.ID)
+
+	if err != nil {
+		return content, err
+	}
+
+	return content, nil
+}
 func (r *repository) FetchAllContent() ([]Content, error) {
 	var sqlStmt string = "SELECT * FROM contents"
 

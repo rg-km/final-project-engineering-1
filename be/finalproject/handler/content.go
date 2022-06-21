@@ -4,6 +4,7 @@ import (
 	"finalproject/helper"
 	"finalproject/module/content"
 	usercamp "finalproject/module/user"
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -45,6 +46,84 @@ func (h *contentHandler) SaveContent(c *gin.Context) {
 	formatter := content.FormatContent(newContent)
 
 	response := helper.APIResponse("Item kontent berhasil disimpan", http.StatusOK, "success", formatter)
+	c.JSON(http.StatusOK, response)
+}
+
+func (h *contentHandler) UploadMedia(c *gin.Context) {
+	file, err := c.FormFile("content")
+	if err != nil {
+		data := gin.H{"is_uploaded": false}
+		response := helper.APIResponse("Gagal upload kontent(Image/Vidio)", http.StatusBadRequest, "error", data)
+
+		c.JSON(http.StatusBadRequest, response)
+		return
+	}
+
+	userID := c.MustGet("currentUser").(usercamp.User)
+
+	path := fmt.Sprintf("media/%d-%s", userID.ID, file.Filename)
+
+	err = c.SaveUploadedFile(file, path)
+	if err != nil {
+		data := gin.H{"is_uploaded": false}
+		response := helper.APIResponse("Gagal upload kontent(Image/Vidio)", http.StatusBadRequest, "error", data)
+
+		c.JSON(http.StatusBadRequest, response)
+		return
+	}
+
+	_, err = h.contentService.SaveMedia(userID.ID, path)
+	if err != nil {
+		data := gin.H{"is_uploaded": false}
+		response := helper.APIResponse("Gagal upload kontent(Image/Vidio)", http.StatusBadRequest, "error", data)
+
+		c.JSON(http.StatusBadRequest, response)
+		return
+	}
+
+	data := gin.H{"is_uploaded": true}
+	response := helper.APIResponse("Berhasil upload kontent(Image/Vidio)", http.StatusOK, "success", data)
+
+	c.JSON(http.StatusOK, response)
+}
+
+func (h *contentHandler) UploadMediaByContentID(c *gin.Context) {
+	file, err := c.FormFile("content")
+	if err != nil {
+		data := gin.H{"is_uploaded": false}
+		response := helper.APIResponse("Gagal upload kontent(Image/Vidio)", http.StatusBadRequest, "error", data)
+
+		c.JSON(http.StatusBadRequest, response)
+		return
+	}
+
+	contentId, _ := strconv.Atoi(c.Param("id"))
+
+	userID := c.MustGet("currentUser").(usercamp.User)
+
+	path := fmt.Sprintf("media/%d-%s", userID.ID, file.Filename)
+
+	err = c.SaveUploadedFile(file, path)
+	if err != nil {
+		data := gin.H{"is_uploaded": false}
+		response := helper.APIResponse("Gagal upload kontent(Image/Vidio)", http.StatusBadRequest, "error", data)
+
+		c.JSON(http.StatusBadRequest, response)
+		return
+	}
+
+	_, err = h.contentService.SaveMediaid(userID.ID, path, int64(contentId))
+	if err != nil {
+		data := gin.H{"is_uploaded": false}
+		response := helper.APIResponse("Gagal upload kontent(Image/Vidio)", http.StatusBadRequest, "error", data)
+
+		c.JSON(http.StatusBadRequest, response)
+		return
+	}
+
+	data := gin.H{"is_uploaded": true}
+	response := helper.APIResponse("Berhasil upload kontent(Image/Vidio)", http.StatusOK, "success", data)
+
 	c.JSON(http.StatusOK, response)
 }
 

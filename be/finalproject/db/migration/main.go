@@ -8,7 +8,7 @@ import (
 
 // Run This Script for migration db
 func main() {
-	db, err := sql.Open("sqlite3", "../forum-camp.db")
+	db, err := sql.Open("sqlite3", "../forum-camp1.db")
 	if err != nil {
 		panic(err)
 	}

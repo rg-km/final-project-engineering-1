@@ -26,7 +26,14 @@ func (h *userHandler) RegisterUser(c *gin.Context) {
 		errors := helper.FormatValidationError(err)
 		errorMessage := gin.H{"errors": errors}
 
-		response := helper.APIResponse("Register account failed", http.StatusUnprocessableEntity, "error", errorMessage)
+		response := helper.APIResponse("Akun gagal didaftarkan", http.StatusUnprocessableEntity, "error", errorMessage)
+		c.JSON(http.StatusUnprocessableEntity, response)
+		return
+	}
+	_, err = h.userService.IsEmailAvailable(input)
+	if err != nil {
+		errorMessage := gin.H{"errors": "email is available, please use another email"}
+		response := helper.APIResponse("Email checking failed", http.StatusUnprocessableEntity, "error", errorMessage)
 		c.JSON(http.StatusUnprocessableEntity, response)
 		return
 	}
@@ -34,21 +41,21 @@ func (h *userHandler) RegisterUser(c *gin.Context) {
 	newUser, err := h.userService.RegisterUser(input)
 
 	if err != nil {
-		response := helper.APIResponse("Register account failed", http.StatusBadRequest, "error", nil)
+		response := helper.APIResponse("Akun gagal didaftarkan", http.StatusBadRequest, "error", nil)
 		c.JSON(http.StatusBadRequest, response)
 		return
 	}
 
 	token, err := h.authService.GenerateToken(int(newUser.ID))
 	if err != nil {
-		response := helper.APIResponse("Register account failed", http.StatusBadRequest, "error", nil)
+		response := helper.APIResponse("Akun gagal didaftarkan", http.StatusBadRequest, "error", nil)
 		c.JSON(http.StatusBadRequest, response)
 		return
 	}
 
 	formatter := usercamp.FormatUser(newUser, token)
 
-	response := helper.APIResponse("Account has been registered", http.StatusOK, "success", formatter)
+	response := helper.APIResponse("Akun berhasil didaftarkan", http.StatusOK, "success", formatter)
 
 	c.JSON(http.StatusOK, response)
 
@@ -61,7 +68,7 @@ func (h *userHandler) Login(c *gin.Context) {
 		errors := helper.FormatValidationError(err)
 		errorMessage := gin.H{"errors": errors}
 
-		response := helper.APIResponse("Login failed", http.StatusUnprocessableEntity, "error", errorMessage)
+		response := helper.APIResponse("Gagal login, validasi gagal dilewati", http.StatusUnprocessableEntity, "error", errorMessage)
 		c.JSON(http.StatusUnprocessableEntity, response)
 		return
 	}
@@ -71,56 +78,22 @@ func (h *userHandler) Login(c *gin.Context) {
 	if err != nil {
 		errorMessage := gin.H{"errors": err.Error()}
 
-		response := helper.APIResponse("Login failed", http.StatusUnprocessableEntity, "error", errorMessage)
+		response := helper.APIResponse("Gagal login", http.StatusUnprocessableEntity, "error", errorMessage)
 		c.JSON(http.StatusUnprocessableEntity, response)
 		return
 	}
 
 	token, err := h.authService.GenerateToken(int(loggedinUser.ID))
 	if err != nil {
-		response := helper.APIResponse("Login failed", http.StatusBadRequest, "error", nil)
+		response := helper.APIResponse("Gagal login, generate token gagal", http.StatusBadRequest, "error", nil)
 		c.JSON(http.StatusBadRequest, response)
 		return
 	}
 
 	formatter := usercamp.FormatUser(loggedinUser, token)
 
-	response := helper.APIResponse("Successfuly loggedin", http.StatusOK, "success", formatter)
+	response := helper.APIResponse("Berhasil login", http.StatusOK, "success", formatter)
 
 	c.JSON(http.StatusOK, response)
 
-}
-func (h *userHandler) CheckEmailAvailability(c *gin.Context) {
-	var input usercamp.CheckEmailInput
-
-	err := c.ShouldBindJSON(&input)
-	if err != nil {
-		errors := helper.FormatValidationError(err)
-		errorMessage := gin.H{"errors": errors}
-
-		response := helper.APIResponse("Email checking failed", http.StatusUnprocessableEntity, "error", errorMessage)
-		c.JSON(http.StatusUnprocessableEntity, response)
-		return
-	}
-
-	isEmailAvailable, err := h.userService.IsEmailAvailable(input)
-	if err != nil {
-		errorMessage := gin.H{"errors": "Server error"}
-		response := helper.APIResponse("Email checking failed", http.StatusUnprocessableEntity, "error", errorMessage)
-		c.JSON(http.StatusUnprocessableEntity, response)
-		return
-	}
-
-	data := gin.H{
-		"is_available": isEmailAvailable,
-	}
-
-	metaMessage := "Email has been registered"
-
-	if isEmailAvailable {
-		metaMessage = "Email is available"
-	}
-
-	response := helper.APIResponse(metaMessage, http.StatusOK, "success", data)
-	c.JSON(http.StatusOK, response)
 }

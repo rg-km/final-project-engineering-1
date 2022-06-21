@@ -24,9 +24,9 @@ func (r *repository) Save(user User) (User, error) {
 	if err != nil {
 		return user, err
 	}
-	sqlStmt = "SELECT * FROM users WHERE email= ? "
+	sqlStmt = "SELECT * FROM users ORDER BY id DESC LIMIT 1"
 
-	row := r.db.QueryRow(sqlStmt, user.Email)
+	row := r.db.QueryRow(sqlStmt)
 	err = row.Scan(
 		&user.ID,
 		&user.Username,
@@ -42,7 +42,7 @@ func (r *repository) Save(user User) (User, error) {
 }
 func (r *repository) FindByEmail(email string) (User, error) {
 	var user User
-	var sqlStmt string = "SELECT * FROM users WHERE email= ? "
+	var sqlStmt string = "SELECT * FROM users WHERE email= ?"
 
 	row := r.db.QueryRow(sqlStmt, email)
 	err := row.Scan(
@@ -66,9 +66,10 @@ func (r *repository) FindByID(ID int) (User, error) {
 
 	row := r.db.QueryRow(sqlStmt, ID)
 	err := row.Scan(
+		&user.ID,
 		&user.Username,
-		&user.Email,
 		&user.Password,
+		&user.Email,
 		&user.Token,
 	)
 	if err != nil {

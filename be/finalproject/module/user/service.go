@@ -9,7 +9,7 @@ import (
 type Service interface {
 	RegisterUser(input RegisterUserInput) (User, error)
 	Login(input LoginInput) (User, error)
-	IsEmailAvailable(input CheckEmailInput) (bool, error)
+	IsEmailAvailable(input RegisterUserInput) (bool, error)
 	GetUserByID(ID int) (User, error)
 }
 
@@ -60,19 +60,19 @@ func (s *service) Login(input LoginInput) (User, error) {
 
 	return user, nil
 }
-func (s *service) IsEmailAvailable(input CheckEmailInput) (bool, error) {
+func (s *service) IsEmailAvailable(input RegisterUserInput) (bool, error) {
 	email := input.Email
 
-	user, err := s.repository.FindByEmail(email)
-	if err != nil {
-		return false, err
-	}
-
-	if user.ID == 0 {
+	user, availabel := s.repository.FindByEmail(email)
+	if availabel != nil {
 		return true, nil
 	}
 
-	return false, nil
+	if user.Email == "" {
+		return false, errors.New("not availabel")
+	}
+
+	return false, errors.New("not availabel")
 }
 func (s *service) GetUserByID(ID int) (User, error) {
 	user, err := s.repository.FindByID(ID)

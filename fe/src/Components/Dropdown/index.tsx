@@ -34,7 +34,7 @@ export default function Dropdown({
             )}
           >
             {leftIcon}
-            <span className="font-medium text-primary">{label}</span>
+            <span className="font-medium text-primary whitespace-nowrap">{label}</span>
             <span className='text-primary'>{CaretDownIcon}</span>
           </Menu.Button>
         </div>

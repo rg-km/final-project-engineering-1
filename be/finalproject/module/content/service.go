@@ -6,6 +6,7 @@ type Service interface {
 	SaveMedia(ID int64, fileLocation string) (Content, error)
 	SaveMediaid(ID int64, fileLocation string, idcontent int64) (Content, error)
 	FetchAllContents() ([]Content, error)
+	FetchContentbyid(ID int64) ([]Content, error)
 }
 
 type service struct {
@@ -21,6 +22,7 @@ func (s *service) SaveContent(input FormCreateContentInput, IDUser int) (Content
 	content.IDUser = int64(IDUser)
 	content.IDCategory = input.IDCategory
 	content.Title = input.Title
+	content.Subtitle = input.Subtitle
 	content.Deksripsi = input.Deskripsi
 
 	newContent, err := s.repository.Save(content)
@@ -37,6 +39,7 @@ func (s *service) UpdateContent(input FormCreateContentInput, IDUser int, IDCont
 	content.IDUser = int64(IDUser)
 	content.IDCategory = input.IDCategory
 	content.Title = input.Title
+	content.Subtitle = input.Subtitle
 	content.Deksripsi = input.Deskripsi
 
 	newContent, err := s.repository.SaveUpdate(content)
@@ -87,4 +90,13 @@ func (s *service) FetchAllContents() ([]Content, error) {
 	}
 
 	return contentss, err
+}
+
+func (s *service) FetchContentbyid(ID int64) ([]Content, error) {
+	contents, err := s.repository.FindAllByIDContentuser(ID)
+	if err != nil {
+		return contents, err
+	}
+
+	return contents, err
 }

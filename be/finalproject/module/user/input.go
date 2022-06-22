@@ -1,9 +1,15 @@
 package usercamp
 
 type RegisterUserInput struct {
-	Username string `json:"name" binding:"required"`
+	Username string `json:"username" binding:"required"`
 	Email    string `json:"email" binding:"required,email"`
 	Password string `json:"password" binding:"required"`
+}
+
+type UpdateUserInput struct {
+	Username string `json:"username"`
+	Email    string `json:"email" binding:"email"`
+	Password string `json:"password"`
 }
 
 type LoginInput struct {
@@ -12,7 +18,7 @@ type LoginInput struct {
 }
 
 type FormCreateUserInput struct {
-	Username string `json:"name" binding:"required"`
+	Username string `json:"username" binding:"required"`
 	Email    string `json:"email" binding:"required,email"`
 	Password string `json:"password" binding:"required"`
 }

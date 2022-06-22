@@ -4,6 +4,7 @@ import "database/sql"
 
 type Repository interface {
 	Save(user User) (User, error)
+	Updateuserrepo(user User) (User, error)
 	FindByEmail(email string) (User, error)
 	FindByID(ID int) (User, error)
 }
@@ -32,7 +33,6 @@ func (r *repository) Save(user User) (User, error) {
 		&user.Username,
 		&user.Password,
 		&user.Email,
-		&user.Token,
 	)
 	if err != nil {
 		return user, err
@@ -50,7 +50,6 @@ func (r *repository) FindByEmail(email string) (User, error) {
 		&user.Username,
 		&user.Password,
 		&user.Email,
-		&user.Token,
 	)
 
 	if err != nil {
@@ -70,7 +69,29 @@ func (r *repository) FindByID(ID int) (User, error) {
 		&user.Username,
 		&user.Password,
 		&user.Email,
-		&user.Token,
+	)
+	if err != nil {
+		return user, err
+	}
+
+	return user, nil
+}
+func (r *repository) Updateuserrepo(user User) (User, error) {
+	var sqlStmt string = "UPDATE users SET username=?, password=?, email=? WHERE id=? "
+
+	_, err := r.db.Exec(sqlStmt, user.Username, user.Password, user.Email, user.ID)
+
+	if err != nil {
+		return user, err
+	}
+	sqlStmt = "SELECT * FROM users WHERE id=?"
+
+	row := r.db.QueryRow(sqlStmt, user.ID)
+	err = row.Scan(
+		&user.ID,
+		&user.Username,
+		&user.Password,
+		&user.Email,
 	)
 	if err != nil {
 		return user, err

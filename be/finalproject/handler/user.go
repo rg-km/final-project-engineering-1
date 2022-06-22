@@ -61,6 +61,7 @@ func (h *userHandler) RegisterUser(c *gin.Context) {
 
 }
 func (h *userHandler) Login(c *gin.Context) {
+
 	var input usercamp.LoginInput
 
 	err := c.ShouldBindJSON(&input)
@@ -93,6 +94,50 @@ func (h *userHandler) Login(c *gin.Context) {
 	formatter := usercamp.FormatUser(loggedinUser, token)
 
 	response := helper.APIResponse("Berhasil login", http.StatusOK, "success", formatter)
+
+	c.JSON(http.StatusOK, response)
+
+}
+
+func (h *userHandler) FetchUserById(c *gin.Context) {
+
+	userID := c.MustGet("currentUser").(usercamp.User)
+	users, err := h.userService.GetUserByID(int(userID.ID))
+	if err != nil {
+		response := helper.APIResponse("Data user gagal ditampilkan", http.StatusBadRequest, "error", nil)
+		c.JSON(http.StatusBadRequest, response)
+		return
+	}
+	formatter := usercamp.FormatUserbyid(users)
+	response := helper.APIResponse("Data user berhasil ditampilkan", http.StatusOK, "success", formatter)
+
+	c.JSON(http.StatusOK, response)
+}
+
+func (h *userHandler) UpdateUser(c *gin.Context) {
+	var input usercamp.UpdateUserInput
+	userID := c.MustGet("currentUser").(usercamp.User)
+	err := c.ShouldBindJSON(&input)
+	if err != nil {
+		errors := helper.FormatValidationError(err)
+		errorMessage := gin.H{"errors": errors}
+
+		response := helper.APIResponse("Akun gagal diupdate", http.StatusUnprocessableEntity, "error", errorMessage)
+		c.JSON(http.StatusUnprocessableEntity, response)
+		return
+	}
+
+	newUser, err := h.userService.UpdateUser(input, int(userID.ID))
+
+	if err != nil {
+		response := helper.APIResponse("Akun gagal diupdate", http.StatusBadRequest, "error", nil)
+		c.JSON(http.StatusBadRequest, response)
+		return
+	}
+
+	formatter := usercamp.FormatUserbyid(newUser)
+
+	response := helper.APIResponse("Akun berhasil diupdate", http.StatusOK, "success", formatter)
 
 	c.JSON(http.StatusOK, response)
 

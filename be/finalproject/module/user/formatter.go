@@ -6,6 +6,11 @@ type UserFormatter struct {
 	Email    string `json:"email" sql:"unique"`
 	Token    string `json:"token"`
 }
+type UserFormatterById struct {
+	ID       int64  `json:"id" sql:"unique"`
+	Username string `json:"username"`
+	Email    string `json:"email" sql:"unique"`
+}
 
 func FormatUser(user User, token string) UserFormatter {
 	formatter := UserFormatter{
@@ -13,6 +18,16 @@ func FormatUser(user User, token string) UserFormatter {
 		Username: user.Username,
 		Email:    user.Email,
 		Token:    token,
+	}
+
+	return formatter
+}
+
+func FormatUserbyid(user User) UserFormatterById {
+	formatter := UserFormatterById{
+		ID:       user.ID,
+		Username: user.Username,
+		Email:    user.Email,
 	}
 
 	return formatter

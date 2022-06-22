@@ -45,9 +45,12 @@ func main() {
 
 	api.POST("/register", userHandler.RegisterUser)
 	api.POST("/login", userHandler.Login)
+	api.GET("/userbyid", middleware.AuthMiddleware(authService, userService), userHandler.FetchUserById)
+	api.PUT("/updateuser", middleware.AuthMiddleware(authService, userService), userHandler.UpdateUser)
 
 	api.POST("/content", middleware.AuthMiddleware(authService, userService), contentHandler.SaveContent)
 	api.GET("/contents", middleware.AuthMiddleware(authService, userService), contentHandler.FetchAllContentss)
+	api.GET("/contentbyiduser", middleware.AuthMiddleware(authService, userService), contentHandler.FetchContentByiduser)
 	api.PUT("/updatecontent/:id", middleware.AuthMiddleware(authService, userService), contentHandler.SaveContentUpdate)
 
 	api.POST("/mediacontent", middleware.AuthMiddleware(authService, userService), contentHandler.UploadMedia)

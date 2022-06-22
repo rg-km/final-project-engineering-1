@@ -8,6 +8,7 @@ import (
 
 type Service interface {
 	RegisterUser(input RegisterUserInput) (User, error)
+	UpdateUser(input UpdateUserInput, IDuser int) (User, error)
 	Login(input LoginInput) (User, error)
 	IsEmailAvailable(input RegisterUserInput) (bool, error)
 	GetUserByID(ID int) (User, error)
@@ -85,4 +86,25 @@ func (s *service) GetUserByID(ID int) (User, error) {
 	}
 
 	return user, nil
+}
+
+func (s *service) UpdateUser(input UpdateUserInput, IDuser int) (User, error) {
+	user := User{}
+	user.ID = int64(IDuser)
+	user.Username = input.Username
+	user.Email = input.Email
+
+	passwordHash, err := bcrypt.GenerateFromPassword([]byte(input.Password), bcrypt.MinCost)
+	if err != nil {
+		return user, err
+	}
+
+	user.Password = string(passwordHash)
+
+	upUser, err := s.repository.Updateuserrepo(user)
+	if err != nil {
+		return upUser, err
+	}
+
+	return upUser, nil
 }

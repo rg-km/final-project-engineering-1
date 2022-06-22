@@ -167,3 +167,16 @@ func (h *contentHandler) FetchAllContentss(c *gin.Context) {
 
 	c.JSON(http.StatusOK, response)
 }
+
+func (h *contentHandler) FetchContentByiduser(c *gin.Context) {
+	userID := c.MustGet("currentUser").(usercamp.User)
+	content, err := h.contentService.FetchContentbyid(userID.ID)
+	if err != nil {
+		response := helper.APIResponse("Data Konten user gagal ditampilkan", http.StatusBadRequest, "error", nil)
+		c.JSON(http.StatusBadRequest, response)
+		return
+	}
+	response := helper.APIResponse("Data Kontent user berhasil ditampilkan", http.StatusOK, "success", content)
+
+	c.JSON(http.StatusOK, response)
+}

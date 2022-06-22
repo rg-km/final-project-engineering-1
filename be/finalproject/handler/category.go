@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"finalproject/category"
+	"finalproject/module/category"
 	"finalproject/helper"
 	"net/http"
 

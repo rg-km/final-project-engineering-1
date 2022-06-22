@@ -1,20 +1,22 @@
 package content
 
-type Service interface {
+
+type ContentService interface {
 	SaveContent(input FormCreateContentInput, IDUser int) (Content, error)
 	UpdateContent(input FormCreateContentInput, IDUser int, IDContent int64) (Content, error)
 	FetchAllContents() ([]Content, error)
+	GetContentByID(input GetContentDetailInput) (Content, error)
 }
 
-type service struct {
-	repository Repository
+type contentService struct {
+	repository ContentRepository
 }
 
-func NewService(repository Repository) *service {
-	return &service{repository}
+func NewService(repository ContentRepository) *contentService {
+	return &contentService{repository}
 }
 
-func (s *service) SaveContent(input FormCreateContentInput, IDUser int) (Content, error) {
+func (s *contentService) SaveContent(input FormCreateContentInput, IDUser int) (Content, error) {
 	content := Content{}
 	content.IDUser = int64(IDUser)
 	content.IDCategory = input.IDCategory
@@ -29,7 +31,7 @@ func (s *service) SaveContent(input FormCreateContentInput, IDUser int) (Content
 	return newContent, nil
 }
 
-func (s *service) UpdateContent(input FormCreateContentInput, IDUser int, IDContent int64) (Content, error) {
+func (s *contentService) UpdateContent(input FormCreateContentInput, IDUser int, IDContent int64) (Content, error) {
 	content := Content{}
 	content.ID = IDContent
 	content.IDUser = int64(IDUser)
@@ -45,11 +47,20 @@ func (s *service) UpdateContent(input FormCreateContentInput, IDUser int, IDCont
 	return newContent, nil
 }
 
-func (s *service) FetchAllContents() ([]Content, error) {
+func (s *contentService) FetchAllContents() ([]Content, error) {
 	contentss, err := s.repository.FetchAllContent()
 	if err != nil {
 		return contentss, err
 	}
 
 	return contentss, err
+}
+
+func (s *contentService) GetContentByID(input GetContentDetailInput) (Content, error) {
+	contentDetail, err := s.repository.FindByContentID(input.ID)
+	if err != nil {
+		return contentDetail, err
+	}
+
+	return contentDetail, err
 }

@@ -5,11 +5,11 @@ import (
 	"time"
 )
 
-type Repository interface {
+type ContentRepository interface {
 	Save(content Content) (Content, error)
 	SaveUpdate(content Content) (Content, error)
-
 	FetchAllContent() ([]Content, error)
+	FindByContentID(ID int) (Content, error)
 }
 
 type repository struct {
@@ -98,4 +98,24 @@ func (r *repository) FetchAllContent() ([]Content, error) {
 	}
 
 	return contents, nil
+}
+
+func (r *repository) FindByContentID(ID int) (Content, error) {
+	var sqlStmt string = "SELECT * FROM contents WHERE id=?"
+
+	row := r.db.QueryRow(sqlStmt, ID)
+	var content Content
+	err := row.Scan(
+		&content.ID,
+		&content.Title,
+		&content.Deksripsi,
+		&content.Path,
+		&content.LastModified,
+		&content.IDUser,
+		&content.IDCategory)
+
+	if err != nil {
+		return content, err
+	}
+	return content, nil
 }

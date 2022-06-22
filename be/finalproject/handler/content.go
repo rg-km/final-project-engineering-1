@@ -11,11 +11,11 @@ import (
 )
 
 type contentHandler struct {
-	contentService content.Service
+	contentService content.ContentService
 	// authService    auth.Service
 }
 
-func NewContentHandler(contentService content.Service) *contentHandler {
+func NewContentHandler(contentService content.ContentService) *contentHandler {
 	return &contentHandler{contentService}
 }
 
@@ -86,5 +86,31 @@ func (h *contentHandler) FetchAllContentss(c *gin.Context) {
 	}
 	response := helper.APIResponse("Data Kontent berhasil ditampilkan", http.StatusOK, "success", content)
 
+	c.JSON(http.StatusOK, response)
+}
+
+func (h *contentHandler) FetchContentById(c *gin.Context) {
+	var input content.GetContentDetailInput
+
+	err := c.ShouldBindUri(&input)
+	if err != nil {
+		errors := helper.FormatValidationError(err)
+		errorMessage := gin.H{"errors": errors}
+
+		response := helper.APIResponse("Data Konten gagal ditampilkan", http.StatusUnprocessableEntity, "error", errorMessage)
+		c.JSON(http.StatusUnprocessableEntity, response)
+		return
+	}
+
+	content, err := h.contentService.GetContentByID(input)
+	if err != nil {
+		response := helper.APIResponse("Data Detail Konten gagal ditampilkan", http.StatusBadRequest, "error", nil)
+		c.JSON(http.StatusBadRequest, response)
+		return
+	}
+
+	// formatter := content.FormatContent(content)
+
+	response := helper.APIResponse("Data Detail Konten berhasil ditampilkan", http.StatusOK, "success", content)
 	c.JSON(http.StatusOK, response)
 }

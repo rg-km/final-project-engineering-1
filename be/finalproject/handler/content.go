@@ -158,6 +158,7 @@ func (h *contentHandler) SaveContentUpdate(c *gin.Context) {
 
 func (h *contentHandler) FetchAllContentss(c *gin.Context) {
 	content, err := h.contentService.FetchAllContents()
+	fmt.Println(err)
 	if err != nil {
 		response := helper.APIResponse("Data Konten gagal ditampilkan", http.StatusBadRequest, "error", nil)
 		c.JSON(http.StatusBadRequest, response)

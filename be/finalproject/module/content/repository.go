@@ -149,7 +149,7 @@ func (r *repository) Update1(content Content) (Content, error) {
 	return content, nil
 }
 func (r *repository) FetchAllContent() ([]Content, error) {
-	var sqlStmt string = "SELECT * FROM contents"
+	var sqlStmt string = "SELECT (SELECT COUNT(*) FROM likes l WHERE l.content_id = c.id) as likes, c.* FROM contents c"
 
 	rows, err := r.db.Query(sqlStmt)
 	if err != nil {
@@ -160,6 +160,7 @@ func (r *repository) FetchAllContent() ([]Content, error) {
 	for rows.Next() {
 		var content Content
 		err = rows.Scan(
+			&content.Likes,
 			&content.ID,
 			&content.IDUser,
 			&content.IDCategory,

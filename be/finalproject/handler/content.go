@@ -180,3 +180,16 @@ func (h *contentHandler) FetchContentByiduser(c *gin.Context) {
 
 	c.JSON(http.StatusOK, response)
 }
+
+func (h *contentHandler) SearchContentByKeyword(c *gin.Context) {
+	keyword := c.Query("keyword")
+	content, err := h.contentService.SearchContentByKeyword(keyword)
+	if err != nil {
+		response := helper.APIResponse("Data Konten gagal ditampilkan", http.StatusBadRequest, "error", nil)
+		c.JSON(http.StatusBadRequest, response)
+		return
+	}
+	response := helper.APIResponse("Data Kontent berhasil ditampilkan", http.StatusOK, "success", content)
+
+	c.JSON(http.StatusOK, response)
+}

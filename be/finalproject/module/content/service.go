@@ -7,6 +7,7 @@ type Service interface {
 	SaveMediaid(ID int64, fileLocation string, idcontent int64) (Content, error)
 	FetchAllContents() ([]Content, error)
 	FetchContentbyid(ID int64) ([]Content, error)
+	SearchContentByKeyword(keyword string) ([]Content, error)
 }
 
 type service struct {
@@ -94,6 +95,15 @@ func (s *service) FetchAllContents() ([]Content, error) {
 
 func (s *service) FetchContentbyid(ID int64) ([]Content, error) {
 	contents, err := s.repository.FindAllByIDContentuser(ID)
+	if err != nil {
+		return contents, err
+	}
+
+	return contents, err
+}
+
+func (s *service) SearchContentByKeyword(keyword string) ([]Content, error) {
+	contents, err := s.repository.SearchContentByKeyword(keyword)
 	if err != nil {
 		return contents, err
 	}

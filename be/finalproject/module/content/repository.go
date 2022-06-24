@@ -14,6 +14,7 @@ type Repository interface {
 	Update(content Content) (Content, error)
 	Update1(content Content) (Content, error)
 	FetchAllContent() ([]Content, error)
+	SearchContentByKeyword(keyword string) ([]Content, error)
 }
 
 type repository struct {
@@ -181,6 +182,35 @@ func (r *repository) FindAllByIDContentuser(ID int64) ([]Content, error) {
 	var sqlStmt string = "SELECT * FROM contents WHERE iduser=?"
 
 	rows, err := r.db.Query(sqlStmt, ID)
+	if err != nil {
+		return nil, err
+	}
+
+	var contents []Content
+	for rows.Next() {
+		var content Content
+		err = rows.Scan(
+			&content.ID,
+			&content.IDUser,
+			&content.IDCategory,
+			&content.Title,
+			&content.Subtitle,
+			&content.Deksripsi,
+			&content.Path,
+			&content.LastModified)
+		if err != nil {
+			return nil, err
+		}
+		contents = append(contents, content)
+	}
+
+	return contents, nil
+}
+
+func (r *repository) SearchContentByKeyword(keyword string) ([]Content, error) {
+	var sqlStmt string = "SELECT * FROM contents WHERE title LIKE '%" + keyword + "%' OR subtitle LIKE '%" + keyword + "%' OR deskripsi LIKE '%" + keyword + "%'"
+
+	rows, err := r.db.Query(sqlStmt)
 	if err != nil {
 		return nil, err
 	}

@@ -3,6 +3,7 @@ package category
 type CategoryService interface {
 	SaveCategory(input CategoryInput) (Category, error)
 	FetchAllCategories() ([]Category, error)
+	SearchCategoryByKeyword(keyword string) ([]Category, error)
 }
 
 type categoryService struct {
@@ -28,6 +29,15 @@ func (s *categoryService) SaveCategory(input CategoryInput) (Category, error) {
 
 func (s *categoryService) FetchAllCategories() ([]Category, error) {
 	categories, err := s.repository.FetchAllCategories()
+	if err != nil {
+		return categories, err
+	}
+
+	return categories, err
+}
+
+func (s *categoryService) SearchCategoryByKeyword(keyword string) ([]Category, error) {
+	categories, err := s.repository.SearchCategoryByKeyword(keyword)
 	if err != nil {
 		return categories, err
 	}

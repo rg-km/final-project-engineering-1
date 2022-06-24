@@ -14,6 +14,8 @@ type Service interface {
 	GetUserByID(ID int) (User, error)
 	GetUser() ([]User, error)
 	DeleteUser(ID int) (User, error)
+	CreateUserAdmin(input RegisterUserInput) (User, error)
+	UpdateUserAdmin(input UpdateUserInput, IDuser int) (User, error)
 }
 
 type service struct {
@@ -35,6 +37,7 @@ func (s *service) RegisterUser(input RegisterUserInput) (User, error) {
 	}
 
 	user.Password = string(passwordHash)
+	user.Role = "user"
 
 	newUser, err := s.repository.Save(user)
 	if err != nil {
@@ -102,6 +105,7 @@ func (s *service) UpdateUser(input UpdateUserInput, IDuser int) (User, error) {
 	}
 
 	user.Password = string(passwordHash)
+	user.Role = "user"
 
 	upUser, err := s.repository.Updateuserrepo(user)
 	if err != nil {
@@ -136,4 +140,47 @@ func (s *service) DeleteUser(ID int) (User, error) {
 	}
 
 	return user, nil
+}
+
+func (s *service) CreateUserAdmin(input RegisterUserInput) (User, error) {
+	user := User{}
+	user.Username = input.Username
+	user.Email = input.Email
+
+	passwordHash, err := bcrypt.GenerateFromPassword([]byte(input.Password), bcrypt.MinCost)
+	if err != nil {
+		return user, err
+	}
+
+	user.Password = string(passwordHash)
+	user.Role = input.Role
+
+	newUser, err := s.repository.Save(user)
+	if err != nil {
+		return newUser, err
+	}
+
+	return newUser, nil
+}
+
+func (s *service) UpdateUserAdmin(input UpdateUserInput, IDuser int) (User, error) {
+	user := User{}
+	user.ID = int64(IDuser)
+	user.Username = input.Username
+	user.Email = input.Email
+
+	passwordHash, err := bcrypt.GenerateFromPassword([]byte(input.Password), bcrypt.MinCost)
+	if err != nil {
+		return user, err
+	}
+
+	user.Password = string(passwordHash)
+	user.Role = input.Role
+
+	upUser, err := s.repository.Updateuserrepo(user)
+	if err != nil {
+		return upUser, err
+	}
+
+	return upUser, nil
 }

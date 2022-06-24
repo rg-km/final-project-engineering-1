@@ -4,6 +4,7 @@ import (
 	"finalproject/auth"
 	"finalproject/helper"
 	usercamp "finalproject/module/user"
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -43,6 +44,7 @@ func (h *userHandler) RegisterUser(c *gin.Context) {
 	if err != nil {
 		response := helper.APIResponse("Akun gagal didaftarkan", http.StatusBadRequest, "error", nil)
 		c.JSON(http.StatusBadRequest, response)
+		fmt.Println(err)
 		return
 	}
 

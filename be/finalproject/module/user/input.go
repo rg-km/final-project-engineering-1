@@ -4,6 +4,7 @@ type RegisterUserInput struct {
 	Username string `json:"username" binding:"required"`
 	Email    string `json:"email" binding:"required,email"`
 	Password string `json:"password" binding:"required"`
+	Role     string `json:"role"`
 }
 
 type UpdateUserInput struct {
@@ -11,6 +12,7 @@ type UpdateUserInput struct {
 	Username string `json:"username"`
 	Email    string `json:"email" binding:"email"`
 	Password string `json:"password"`
+	Role     string `json:"role"`
 }
 
 type LoginInput struct {
@@ -28,5 +30,6 @@ type FormUserInput struct {
 	Username string `form:"username" binding:"required"`
 	Email    string `form:"email" binding:"required,email"`
 	Password string `form:"password" binding:"required"`
+	Role     string `form:"role" binding:"required"`
 	Error    error
 }

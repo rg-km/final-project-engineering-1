@@ -44,8 +44,9 @@ func (h *userHandler) CreateUser(c *gin.Context) {
 	userInput.Username = input.Username
 	userInput.Email = input.Email
 	userInput.Password = input.Password
+	userInput.Role = input.Role
 
-	_, _ = h.userService.RegisterUser(userInput)
+	_, _ = h.userService.CreateUserAdmin(userInput)
 	c.Redirect(http.StatusFound, "/users")
 }
 
@@ -79,8 +80,9 @@ func (h *userHandler) UpdateUser(c *gin.Context) {
 	if input.Password != "" {
 		userInput.Password = input.Password
 	}
+	userInput.Role = input.Role
 
-	_, err = h.userService.UpdateUser(userInput, id)
+	_, err = h.userService.UpdateUserAdmin(userInput, id)
 	if err != nil {
 		c.HTML(http.StatusInternalServerError, "error.html", nil)
 		return

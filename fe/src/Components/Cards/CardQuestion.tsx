@@ -11,7 +11,7 @@ export default function CardQuestion({id}: Props) {
       <div className="border shadow rounded-md p-4">
         <div className="flex flex-row space-x-4">
           {/* Stats */}
-          <div className="w-1/12">
+          {/* <div className="w-1/12">
             <div className="flex flex-row space-x-2 items-center justify-end text-lg">
               <p>1</p>
               <p className="h-6 w-6">{LikeIcon}</p>
@@ -20,7 +20,7 @@ export default function CardQuestion({id}: Props) {
               <p>1</p>
               <p className="h-6 w-6">{ChatIcon}</p>
             </div>
-          </div>
+          </div> */}
           <div className="w-11/12 space-y-4">
             <h1 className="font-bold text-lg">Ini judul halaman</h1>
             <p>

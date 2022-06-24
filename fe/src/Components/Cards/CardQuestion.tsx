@@ -1,13 +1,15 @@
+import moment from "moment";
 import { Link } from "react-router-dom";
+import { Question } from "../../store/store";
 import { ChatIcon, LikeIcon } from "../Icons";
 
 type Props = {
-  id: string;
+  data: Question;
 };
 
-export default function CardQuestion({id}: Props) {
+export default function CardQuestion({ data }: Props) {
   return (
-    <Link to={`/question/${id}`} className='block'>
+    <Link to={`/question/${data.id}`} className="block">
       <div className="border shadow rounded-md p-4">
         <div className="flex flex-row space-x-4">
           {/* Stats */}
@@ -22,28 +24,24 @@ export default function CardQuestion({id}: Props) {
             </div>
           </div> */}
           <div className="w-11/12 space-y-4">
-            <h1 className="font-bold text-lg">Ini judul halaman</h1>
-            <p>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nostrum
-              similique sit esse numquam, fuga natus impedit repudiandae tempore
-              laudantium asperiores quas? Porro ipsam facere, recusandae beatae
-              excepturi rerum tempora corporis.
-            </p>
+            <h1 className="font-bold text-lg">{data.title}</h1>
+            <p>{data.content}</p>
             <div className="flex flex-row justify-between">
               <div className="flex flex-wrap">
-                <div className="px-2 py-1 rounded-md bg-primary-light text-white mr-1 text-xs">
-                  ReactJS
-                </div>
-                <div className="px-2 py-1 rounded-md bg-primary-light text-white mr-1 text-xs">
-                  Javascript
-                </div>
-                <div className="px-2 py-1 rounded-md bg-primary-light text-white mr-1 text-xs">
-                  Typescript
-                </div>
+                {data.tags.map((tag, idx) => (
+                  <div
+                    key={idx}
+                    className="px-2 py-1 rounded-md bg-primary-light text-white mr-1 text-xs"
+                  >
+                    {tag}
+                  </div>
+                ))}
               </div>
               <div className="space-x-2 text-xs">
-                <span className="text-primary">Author</span>
-                <span className="text-gray-400">1 menit yang lalu</span>
+                <span className="text-primary">{data.author}</span>
+                <span className="text-gray-400">
+                  {moment(data.created_at).fromNow()}
+                </span>
               </div>
             </div>
           </div>

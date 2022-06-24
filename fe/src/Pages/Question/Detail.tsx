@@ -1,18 +1,22 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import Comments from "../../Components/Comments/Comments";
 import { ChatIcon, LikeIcon } from "../../Components/Icons";
-import useStore from "../../store/store";
+import useStore, { Question } from "../../store/store";
 
 type Props = {};
 
 export default function Detail({}: Props) {
-  const { setIsLoading } = useStore();
+  const { setIsLoading, questions } = useStore();
+  const [data, setData] = useState<Question>();
+  let { id } = useParams();
 
   useEffect(() => {
     setIsLoading(false);
+    setData(questions.find((item) => item.id === Number(id)));
     return () => setIsLoading(true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [id]);
   return (
     <div className="space-y-4 divide-y">
       {/* Question */}
@@ -25,30 +29,28 @@ export default function Detail({}: Props) {
             className="w-12 h-12 aspect-square rounded-full"
           />
           <div>
-            <p className="font-bold">Liem cien</p>
-            <p className="text-sm">10 Januari 2020</p>
+            <p className="font-bold">{data?.author}</p>
+            <p className="text-sm">{data?.created_at}</p>
           </div>
         </div>
         {/* Title */}
-        <h1 className="text-lg font-bold">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat
-          exercitationem, quasi totam illo, laboriosam expedita
-        </h1>
+        <h1 className="text-lg font-bold">{data?.title}</h1>
         {/* Content Body */}
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem,
-          reiciendis! Cum, ex consequatur reprehenderit dolore atque debitis.
-          Voluptates molestias repellat corporis itaque dolorum pariatur. Vel
-          asperiores itaque molestias accusantium dolorum.
-        </p>
+        <p>{data?.content}</p>
         {/* Tags */}
         <div className="flex flex-wrap">
-          <div className="px-2 py-1 rounded-md bg-primary-light text-white mr-1 text-xs">
-            Typescript
-          </div>
+          {data &&
+            data.tags.map((tag, idx) => (
+              <div
+                key={idx}
+                className="px-2 py-1 rounded-md bg-primary-light text-white mr-1 text-xs"
+              >
+                {tag}
+              </div>
+            ))}
         </div>
         {/* Like Dislike */}
-        <div className="flex flex-row items-center space-x-2">
+        {/* <div className="flex flex-row items-center space-x-2">
           <div className="flex flex-row space-x-2 items-center justify-end text-lg">
             <p className="h-6 w-6">{LikeIcon}</p>
             <p className="text-sm">1</p>
@@ -61,11 +63,11 @@ export default function Detail({}: Props) {
             <p className="h-6 w-6">{ChatIcon}</p>
             <p className="text-sm">1</p>
           </div>
-        </div>
+        </div> */}
       </div>
       {/* Comment Section */}
       <div className="pt-4">
-        <Comments />
+        <Comments data={data?.answer} />
       </div>
     </div>
   );

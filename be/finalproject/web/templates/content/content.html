@@ -1,0 +1,48 @@
+{{ define "content" }}
+<h2 class="mb-4">List of User</h2>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <table class="table table-bordered mb-0" id="myTable" style="width:100%">
+            <thead class="thead-light">
+                <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Title</th>
+                    <th>Subtitle</th>
+                    <th>Deksripsi</th>
+                    <th>Path</th>
+                    <th>Last Modified</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody style="font-size: 12px;">
+                {{range .contents }}
+                <tr>
+                    <td>{{ .Username }}</td>
+                    <td>{{ .Email }}</td>
+                    <td>{{ .Title }}</td>
+                    <td>{{ .Subtitle }}</td>
+                    <td>{{ .Deksripsi }}</td>
+
+                    {{ if .Path }}
+                    <td>{{ .Path }}</td>
+                    {{ else }}
+                    <td>
+                        <span class="badge badge-pill badge-warning">No Media</span>
+                    </td>
+                    {{ end }}
+
+                    <td>{{ .LastModified }}</td>
+                    <td>
+                        <form action="/" method="POST" class="d-inline">
+                            <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                        </form>
+                    </td>
+                </tr>
+                {{ end }}
+            </tbody>
+        </table>
+    </div>
+</div>
+{{ end }}

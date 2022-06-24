@@ -8,7 +8,7 @@ import (
 
 // Run This Script for migration db
 func main() {
-	db, err := sql.Open("sqlite3", "../forum-camp.db")
+	db, err := sql.Open("sqlite3", "../forum-camp1.db")
 	if err != nil {
 		panic(err)
 	}
@@ -22,10 +22,10 @@ func main() {
 	token varchar(255) not null
 );
 
-INSERT INTO users(username, password, email, token) VALUES
-    ('doni', '1234', 'doni@gmail.com', '1'),
-    ('dina', '4321', 'dina@gmail.com', '1'),
-    ('dito', '2552', 'dito@gmail.com', '1');`)
+INSERT INTO users(username, password, email) VALUES
+    ('doni', '1234', 'doni@gmail.com'),
+    ('dina', '4321', 'dina@gmail.com'),
+    ('dito', '2552', 'dito@gmail.com');`)
 
 	if err != nil {
 		panic(err)
@@ -36,7 +36,7 @@ INSERT INTO users(username, password, email, token) VALUES
 		id integer  PRIMARY KEY AUTOINCREMENT NOT NULL,
 		title varchar(255) not null,
 		deskripsi varchar(255) not null,
-		path_image varchar(255) not null
+		path_image varchar(255) not null,
 );
 
 INSERT INTO contents(title, deskripsi, path_image) VALUES
@@ -62,7 +62,7 @@ INSERT INTO category(name, status) VALUES
 		panic(err)
 	}
 
-	// sqlStmt := `DROP TABLE category;`
+	// sqlStmt := `DROP TABLE contents;`
 	// _, err = db.Exec(sqlStmt)
 	// if err != nil {
 	// 	panic(err)

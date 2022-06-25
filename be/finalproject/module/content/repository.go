@@ -15,6 +15,7 @@ type Repository interface {
 	Update1(content Content) (Content, error)
 	FetchAllContent() ([]Content, error)
 	FetchAllContentAndUser() ([]ContentUser, error)
+	Delete(ID int) (Content, error)
 }
 
 type repository struct {
@@ -208,7 +209,7 @@ func (r *repository) FindAllByIDContentuser(ID int64) ([]Content, error) {
 }
 
 func (r *repository) FetchAllContentAndUser() ([]ContentUser, error) {
-	var sqlStmt string = "SELECT c.id, c.iduser, c.title, c.subtitle, c.deskripsi , c.path, u.username, u.email FROM contents c INNER JOIN users u ON c.id = u.id"
+	var sqlStmt string = "SELECT c.id, c.iduser, c.title, c.subtitle, c.deskripsi, c.path, u.username, u.email FROM contents c INNER JOIN users u ON c.id = u.id"
 
 	rows, err := r.db.Query(sqlStmt)
 	if err != nil {
@@ -235,4 +236,34 @@ func (r *repository) FetchAllContentAndUser() ([]ContentUser, error) {
 	}
 
 	return contents, nil
+}
+
+func (r *repository) Delete(ID int) (Content, error) {
+	var content Content
+
+	var sqlStmt string = "SELECT * FROM contents WHERE id=?"
+
+	row := r.db.QueryRow(sqlStmt, ID)
+	err := row.Scan(
+		&content.ID,
+		&content.IDUser,
+		&content.IDCategory,
+		&content.Title,
+		&content.Subtitle,
+		&content.Deksripsi,
+		&content.Path,
+		&content.LastModified,
+	)
+
+	if err != nil {
+		return content, err
+	}
+
+	sqlStmt = "DELETE FROM contents WHERE id=?"
+	_, err = r.db.Exec(sqlStmt, ID)
+	if err != nil {
+		return content, err
+	}
+
+	return content, nil
 }

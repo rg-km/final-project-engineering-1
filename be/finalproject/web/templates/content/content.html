@@ -1,5 +1,6 @@
 {{ define "content" }}
-<h2 class="mb-4">List of User</h2>
+<h2 class="mb-4">List of Content User</h2>
+
 
 <div class="card mb-4">
     <div class="card-body">
@@ -26,7 +27,7 @@
                     <td>{{ .Deksripsi }}</td>
 
                     {{ if .Path }}
-                    <td>{{ .Path }}</td>
+                    <td><img width="60px" src="{{ .Path }}" class="img-fluid img-thumbnail"></td>
                     {{ else }}
                     <td>
                         <span class="badge badge-pill badge-warning">No Media</span>
@@ -35,7 +36,7 @@
 
                     <td>{{ .LastModified }}</td>
                     <td>
-                        <form action="/" method="POST" class="d-inline">
+                        <form action="/contents/delete/{{ .ID }}" method="POST" class="d-inline">
                             <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button>
                         </form>
                     </td>
@@ -43,6 +44,7 @@
                 {{ end }}
             </tbody>
         </table>
+
     </div>
 </div>
 {{ end }}

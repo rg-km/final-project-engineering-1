@@ -30,6 +30,6 @@ type FormUserInput struct {
 	Username string `form:"username" binding:"required"`
 	Email    string `form:"email" binding:"required,email"`
 	Password string `form:"password" binding:"required"`
-	Role     string `form:"role" binding:"required"`
+	Role     string `form:"role"`
 	Error    error
 }

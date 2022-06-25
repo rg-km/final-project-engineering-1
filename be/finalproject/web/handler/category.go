@@ -53,7 +53,6 @@ func (h *categoryHandler) CreateCategory(c *gin.Context) {
 		c.HTML(http.StatusInternalServerError, "error.html", nil)
 		return
 	}
-
 	c.Redirect(http.StatusFound, "/categories")
 }
 

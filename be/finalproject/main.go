@@ -8,6 +8,7 @@ import (
 
 	"finalproject/module/category"
 	"finalproject/module/content"
+	"finalproject/module/dashboard"
 	usercamp "finalproject/module/user"
 	webHandler "finalproject/web/handler"
 
@@ -43,6 +44,9 @@ func main() {
 	categoryService := category.NewService(categoryRepository)
 	categoryHandler := handler.NewCategoryHandler(categoryService)
 
+	DashboardRepository := dashboard.NewRepository(db)
+	DashboardService := dashboard.NewService(DashboardRepository)
+
 	router := gin.Default()
 
 	router.HTMLRender = loadTemplates("./web/templates")
@@ -66,9 +70,10 @@ func main() {
 
 	api.POST("/categories", middleware.AuthMiddleware(authService, userService), categoryHandler.SaveCategory)
 	api.GET("/categories", middleware.AuthMiddleware(authService, userService), categoryHandler.FetchAllCategories)
+	api.DELETE("/categories/:id", middleware.AuthMiddleware(authService, userService), categoryHandler.DeleteCategory)
 
 	// CMS ADMIN
-	dashboardWebHandler := webHandler.NewDashboardHandler()
+	dashboardWebHandler := webHandler.NewDashboardHandler(DashboardService)
 	categoryWebHandler := webHandler.NewCategoryHandler(categoryService)
 	userWebHandler := webHandler.NewUserHandler(userService)
 	contentWebHandler := webHandler.NewContentHandler(contentService)
@@ -90,9 +95,8 @@ func main() {
 	router.POST("/users/delete/:id", userWebHandler.DeleteUser)
 
 	router.GET("/contents", contentWebHandler.Index)
-
+	router.POST("/contents/delete/:id", contentWebHandler.DeleteContent)
 	router.Run(":8082")
-
 }
 
 func loadTemplates(templatesDir string) multitemplate.Renderer {

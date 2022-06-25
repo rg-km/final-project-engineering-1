@@ -4,6 +4,7 @@ import (
 	"finalproject/helper"
 	"finalproject/module/category"
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
@@ -51,5 +52,25 @@ func (h *categoryHandler) FetchAllCategories(c *gin.Context) {
 	}
 	response := helper.APIResponse("Data kategori berhasil ditampilkan", http.StatusOK, "success", categories)
 
+	c.JSON(http.StatusOK, response)
+}
+
+func (h *categoryHandler) DeleteCategory(c *gin.Context) {
+	id, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		response := helper.APIResponse("Failed delete category", http.StatusBadRequest, "error", nil)
+		c.JSON(http.StatusBadRequest, response)
+	}
+
+	_, err = h.categoryService.DeleteCategory(id)
+	if err != nil {
+		response := helper.APIResponse("Category not Found", http.StatusBadRequest, "error", nil)
+		c.JSON(http.StatusBadRequest, response)
+		return
+	}
+
+	data := gin.H{"id": id}
+
+	response := helper.APIResponse("Category has been deleted", http.StatusOK, "success", data)
 	c.JSON(http.StatusOK, response)
 }

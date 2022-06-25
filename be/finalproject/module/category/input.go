@@ -7,7 +7,7 @@ type CategoryInput struct {
 
 type FormCreateCategoryInput struct {
 	Name   string `form:"name" binding:"required"`
-	Status bool   `form:"status" binding:"required"`
+	Status bool   `form:"status"`
 	Error  error
 }
 

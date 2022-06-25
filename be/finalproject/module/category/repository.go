@@ -26,7 +26,7 @@ func (r *repository) Save(category Category) (Category, error) {
 		return category, err
 	}
 
-	sqlStmt = "SELECT * FROM category ORDER BY id DESC LIMIT 1"
+	sqlStmt = "SELECT * FROM category"
 
 	row := r.db.QueryRow(sqlStmt)
 	err = row.Scan(

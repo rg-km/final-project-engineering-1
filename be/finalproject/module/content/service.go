@@ -8,6 +8,7 @@ type Service interface {
 	FetchAllContents() ([]Content, error)
 	FetchContentbyid(ID int64) ([]Content, error)
 	FetchAllContentAndUser() ([]ContentUser, error)
+	DeleteContent(ID int) (Content, error)
 }
 
 type service struct {
@@ -109,4 +110,13 @@ func (s *service) FetchAllContentAndUser() ([]ContentUser, error) {
 	}
 
 	return contents, err
+}
+
+func (s *service) DeleteContent(ID int) (Content, error) {
+	content, err := s.repository.Delete(ID)
+	if err != nil {
+		return content, err
+	}
+
+	return content, nil
 }

@@ -2,7 +2,9 @@ package handler
 
 import (
 	"finalproject/module/content"
+	"fmt"
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
@@ -23,4 +25,16 @@ func (h *contentHandler) Index(c *gin.Context) {
 		return
 	}
 	c.HTML(http.StatusOK, "content.html", gin.H{"contents": contents})
+}
+
+func (h *contentHandler) DeleteContent(c *gin.Context) {
+	contentId := c.Param("id")
+	id, _ := strconv.Atoi(contentId)
+
+	_, err := h.contentService.DeleteContent(id)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	c.Redirect(http.StatusFound, "/contents")
 }

@@ -11,6 +11,7 @@ import Loading from "./Components/Loading";
 import { ToastContainer } from "react-toastify";
 import CreateQuestion from "./Pages/Question/CreateQuestion";
 import About from "./Pages/About";
+import Profile from "./Pages/Profile";
 
 function App() {
   const { isLoading } = useStore();
@@ -24,6 +25,7 @@ function App() {
             <Route path=":id" element={<Detail />} />
           </Route>
           <Route path="about" element={<About/>} />
+          <Route path="profile" element={<Profile/>} />
           <Route path="*" element={<NotFound />} />
           <Route path="auth">
             <Route path="login" element={<Login />} />

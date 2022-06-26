@@ -55,16 +55,16 @@ export default function Select({
         <p
           className={classNames(
             "text-xs inline-block",
-            infoType === "danger" ? "text-primary" : "",
+            infoType === "danger" ? "text-red-600" : "",
             infoType === "success" ? "text-green-500" : "",
-            infoType === "primary" ? "text-blue-600" : ""
+            infoType === "primary" ? "text-primary" : ""
           )}
         >
           {info}
         </p>
       )}
       {error && (
-        <span className="text-sm inline-block text-primary">{error}</span>
+        <span className="text-sm inline-block text-red-600">{error}</span>
       )}
     </div>
   );

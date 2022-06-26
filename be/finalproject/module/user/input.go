@@ -15,6 +15,12 @@ type UpdateUserInput struct {
 	Role     string `json:"role"`
 }
 
+type UpdateUserInput struct {
+	Username string `json:"username"`
+	Email    string `json:"email" binding:"email"`
+	Password string `json:"password"`
+}
+
 type LoginInput struct {
 	Email    string `json:"email" form:"email" binding:"required,email"`
 	Password string `json:"password" form:"password" binding:"required"`

@@ -6,3 +6,7 @@ type FormCreateContentInput struct {
 	Subtitle   string `form:"subtitle" json:"subtitle" binding:"required"`
 	Deskripsi  string `form:"deskripsi" json:"deskripsi" validate:"required"`
 }
+
+type FormLikeContentInput struct {
+	ID int64 `form:"id_content" json:"id_content" binding:"required"`
+}

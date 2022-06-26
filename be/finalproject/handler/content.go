@@ -170,13 +170,48 @@ func (h *contentHandler) FetchAllContentss(c *gin.Context) {
 
 func (h *contentHandler) FetchContentByiduser(c *gin.Context) {
 	userID := c.MustGet("currentUser").(usercamp.User)
-	content, err := h.contentService.FetchContentbyid(userID.ID)
+	content, err := h.contentService.FetchAllContentbyiduser(userID.ID)
 	if err != nil {
 		response := helper.APIResponse("Data Konten user gagal ditampilkan", http.StatusBadRequest, "error", nil)
 		c.JSON(http.StatusBadRequest, response)
 		return
 	}
 	response := helper.APIResponse("Data Kontent user berhasil ditampilkan", http.StatusOK, "success", content)
+
+	c.JSON(http.StatusOK, response)
+}
+func (h *contentHandler) SearchContentByKeyword(c *gin.Context) {
+	keyword := c.Query("keyword")
+	content, err := h.contentService.SearchContentByKeyword(keyword)
+	if err != nil {
+		response := helper.APIResponse("Data Konten gagal ditampilkan", http.StatusBadRequest, "error", nil)
+		c.JSON(http.StatusBadRequest, response)
+		return
+	}
+	response := helper.APIResponse("Data Kontent berhasil ditampilkan", http.StatusOK, "success", content)
+
+	c.JSON(http.StatusOK, response)
+}
+
+func (h *contentHandler) ActionlikeContent(c *gin.Context) {
+	var input content.FormLikeContentInput
+	err := c.ShouldBindJSON(&input)
+	if err != nil {
+		errors := helper.FormatValidationError(err)
+		errorMessage := gin.H{"errors": errors}
+
+		response := helper.APIResponse("kontent gagal disukai", http.StatusUnprocessableEntity, "error", errorMessage)
+		c.JSON(http.StatusUnprocessableEntity, response)
+		return
+	}
+	userID := c.MustGet("currentUser").(usercamp.User)
+	content, err := h.contentService.ActionLike(userID.ID, input)
+	if err != nil {
+		response := helper.APIResponse("kontent gagal disukai", http.StatusBadRequest, "error", nil)
+		c.JSON(http.StatusBadRequest, response)
+		return
+	}
+	response := helper.APIResponse("kontent berhasil disukai", http.StatusOK, "success", content)
 
 	c.JSON(http.StatusOK, response)
 }

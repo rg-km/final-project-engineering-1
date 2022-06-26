@@ -8,9 +8,14 @@ import (
 
 type Service interface {
 	RegisterUser(input RegisterUserInput) (User, error)
+	UpdateUser(input UpdateUserInput, IDuser int) (User, error)
 	Login(input LoginInput) (User, error)
-	IsEmailAvailable(input CheckEmailInput) (bool, error)
+	IsEmailAvailable(input RegisterUserInput) (bool, error)
 	GetUserByID(ID int) (User, error)
+	GetUser() ([]User, error)
+	DeleteUser(ID int) (User, error)
+	CreateUserAdmin(input RegisterUserInput) (User, error)
+	UpdateUserAdmin(input UpdateUserInput, IDuser int) (User, error)
 }
 
 type service struct {
@@ -32,6 +37,7 @@ func (s *service) RegisterUser(input RegisterUserInput) (User, error) {
 	}
 
 	user.Password = string(passwordHash)
+	user.Role = "user"
 
 	newUser, err := s.repository.Save(user)
 	if err != nil {
@@ -60,19 +66,19 @@ func (s *service) Login(input LoginInput) (User, error) {
 
 	return user, nil
 }
-func (s *service) IsEmailAvailable(input CheckEmailInput) (bool, error) {
+func (s *service) IsEmailAvailable(input RegisterUserInput) (bool, error) {
 	email := input.Email
 
-	user, err := s.repository.FindByEmail(email)
-	if err != nil {
-		return false, err
-	}
-
-	if user.ID == 0 {
+	user, availabel := s.repository.FindByEmail(email)
+	if availabel != nil {
 		return true, nil
 	}
 
-	return false, nil
+	if user.Email == "" {
+		return false, errors.New("not availabel")
+	}
+
+	return false, errors.New("not availabel")
 }
 func (s *service) GetUserByID(ID int) (User, error) {
 	user, err := s.repository.FindByID(ID)
@@ -85,4 +91,96 @@ func (s *service) GetUserByID(ID int) (User, error) {
 	}
 
 	return user, nil
+}
+
+func (s *service) UpdateUser(input UpdateUserInput, IDuser int) (User, error) {
+	user := User{}
+	user.ID = int64(IDuser)
+	user.Username = input.Username
+	user.Email = input.Email
+
+	passwordHash, err := bcrypt.GenerateFromPassword([]byte(input.Password), bcrypt.MinCost)
+	if err != nil {
+		return user, err
+	}
+
+	user.Password = string(passwordHash)
+	user.Role = "user"
+
+	upUser, err := s.repository.Updateuserrepo(user)
+	if err != nil {
+		return upUser, err
+	}
+
+	return upUser, nil
+}
+
+func (s *service) GetUser() ([]User, error) {
+	users, err := s.repository.FetchAllUser()
+	if err != nil {
+		return users, err
+	}
+
+	var usersList []User
+	for _, user := range users {
+		usersList = append(usersList, user)
+	}
+
+	return users, nil
+}
+
+func (s *service) DeleteUser(ID int) (User, error) {
+	user, err := s.repository.Delete(ID)
+	if err != nil {
+		return user, err
+	}
+
+	if user.ID == 0 {
+		return user, errors.New("no user found on that ID")
+	}
+
+	return user, nil
+}
+
+func (s *service) CreateUserAdmin(input RegisterUserInput) (User, error) {
+	user := User{}
+	user.Username = input.Username
+	user.Email = input.Email
+
+	passwordHash, err := bcrypt.GenerateFromPassword([]byte(input.Password), bcrypt.MinCost)
+	if err != nil {
+		return user, err
+	}
+
+	user.Password = string(passwordHash)
+	user.Role = input.Role
+
+	newUser, err := s.repository.Save(user)
+	if err != nil {
+		return newUser, err
+	}
+
+	return newUser, nil
+}
+
+func (s *service) UpdateUserAdmin(input UpdateUserInput, IDuser int) (User, error) {
+	user := User{}
+	user.ID = int64(IDuser)
+	user.Username = input.Username
+	user.Email = input.Email
+
+	passwordHash, err := bcrypt.GenerateFromPassword([]byte(input.Password), bcrypt.MinCost)
+	if err != nil {
+		return user, err
+	}
+
+	user.Password = string(passwordHash)
+	user.Role = input.Role
+
+	upUser, err := s.repository.Updateuserrepo(user)
+	if err != nil {
+		return upUser, err
+	}
+
+	return upUser, nil
 }

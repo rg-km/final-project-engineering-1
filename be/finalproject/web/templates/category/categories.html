@@ -1,0 +1,37 @@
+{{ define "content" }}
+<h2 class="mb-4">List of Category</h2>
+
+<a href="/categories/new" class=" btn btn-primary mb-3"><i class="fa fa-plus"></i> New Category</a>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <table class="table table-bordered mb-0" id="myTable" style="width:100%">
+            <thead class="thead-light">
+                <tr>
+                    <th>Name</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{ range .categories }}
+                <tr>
+                    <td>{{ .Name }}</td>
+                    <td>{{ .Status }}</td>
+                    <td>
+                        <a href="/categories/edit/{{ .ID }}" class="btn btn-primary d-inline"><i
+                                class="fa fa-edit"></i></a>
+
+                        <form action="/categories/delete/{{ .ID }}" method="POST" class="d-inline">
+                            <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                        </form>
+
+                    </td>
+                </tr>
+
+                {{ end }}
+            </tbody>
+        </table>
+    </div>
+</div>
+{{ end }}

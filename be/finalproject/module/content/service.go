@@ -6,7 +6,9 @@ type Service interface {
 	SaveMedia(ID int64, fileLocation string) (Content, error)
 	SaveMediaid(ID int64, fileLocation string, idcontent int64) (Content, error)
 	FetchAllContents() ([]Content, error)
-	FetchContentbyid(ID int64) ([]Content, error)
+	FetchAllContentbyiduser(ID int64) ([]Content, error)
+	SearchContentByKeyword(keyword string) ([]Content, error)
+	ActionLike(ID int64, input FormLikeContentInput) (Content, error)
 }
 
 type service struct {
@@ -92,11 +94,31 @@ func (s *service) FetchAllContents() ([]Content, error) {
 	return contentss, err
 }
 
-func (s *service) FetchContentbyid(ID int64) ([]Content, error) {
+func (s *service) FetchAllContentbyiduser(ID int64) ([]Content, error) {
 	contents, err := s.repository.FindAllByIDContentuser(ID)
 	if err != nil {
 		return contents, err
 	}
 
 	return contents, err
+}
+func (s *service) SearchContentByKeyword(keyword string) ([]Content, error) {
+	contents, err := s.repository.SearchContentByKeyword(keyword)
+	if err != nil {
+		return contents, err
+	}
+
+	return contents, err
+}
+func (s *service) ActionLike(ID int64, input FormLikeContentInput) (Content, error) {
+	content := Content{}
+	content.ID = input.ID
+	content.IDUser = ID
+
+	likeContent, err := s.repository.SaveLike(content)
+	if err != nil {
+		return likeContent, err
+	}
+
+	return likeContent, nil
 }

@@ -1,0 +1,651 @@
+{
+	"info": {
+		"_postman_id": "9929212f-51ba-43d5-9504-fdec29b94c6b",
+		"name": "forumcamp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17884440"
+	},
+	"item": [
+		{
+			"name": "register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"sjss\",\r\n    \"password\":\"eeee\",\r\n    \"email\":\"gsgh@gmail.com\"\r\n\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/v1/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"v1",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"gsgh@gmail.com\",\r\n    \"password\":\"eeee\"\r\n\r\n\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/v1/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"v1",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "userbyid",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxNH0.Zq0jTcc8OjHvWla3y5DODDylTsawM3IpxnZ0qqG2KFI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"gsgh@gmail.com\",\r\n    \"password\":\"eeee\"\r\n\r\n\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/v1/userbyid",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"v1",
+						"userbyid"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateuser",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxNH0.Zq0jTcc8OjHvWla3y5DODDylTsawM3IpxnZ0qqG2KFI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"sjshhs\",\r\n    \"password\":\"eeee\",\r\n    \"email\":\"gsgh@gmail.com\"\r\n\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/v1/updateuser",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"v1",
+						"updateuser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "postcontent",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxNH0.Zq0jTcc8OjHvWla3y5DODDylTsawM3IpxnZ0qqG2KFI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \r\n   \"id_category\":2,\r\n   \"title\":\"Engglisui\",\r\n   \"subtitle\":\"interpersonal\",\r\n   \"deskripsi\":\"djdjdjdj\"\r\n\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/v1/content",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"v1",
+						"content"
+					],
+					"query": [
+						{
+							"key": "deskripsi",
+							"value": "dd",
+							"disabled": true
+						},
+						{
+							"key": "id_content",
+							"value": "20",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "media",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxNH0.Zq0jTcc8OjHvWla3y5DODDylTsawM3IpxnZ0qqG2KFI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "content",
+							"type": "file",
+							"src": "/C:/Users/LENOVO/Downloads/81838-sand-timer.gif"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/v1/mediacontent",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"v1",
+						"mediacontent"
+					],
+					"query": [
+						{
+							"key": "deskripsi",
+							"value": "dd",
+							"disabled": true
+						},
+						{
+							"key": "id_content",
+							"value": "20",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updatecontent",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxNH0.Zq0jTcc8OjHvWla3y5DODDylTsawM3IpxnZ0qqG2KFI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \r\n   \"id_category\":2,\r\n   \"title\":\"Engglisui\",\r\n   \"subtitle\":\"interpersonal skill\",\r\n   \"deskripsi\":\"djdjdjdj\"\r\n\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/v1/updatecontent/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"v1",
+						"updatecontent",
+						"3"
+					],
+					"query": [
+						{
+							"key": "deskripsi",
+							"value": "dd",
+							"disabled": true
+						},
+						{
+							"key": "id_content",
+							"value": "20",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updatemedia",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMX0.k12As9xeUqA8zjpmupl38yhxrifJcCwpQIzFa7D5-uk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "content",
+							"type": "file",
+							"src": "/C:/Users/LENOVO/Downloads/81838-sand-timer.gif"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/v1/updatemediacontent/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"v1",
+						"updatemediacontent",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "allcontent",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxNH0.Zq0jTcc8OjHvWla3y5DODDylTsawM3IpxnZ0qqG2KFI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/v1/contents",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"v1",
+						"contents"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "contentbyiduser",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxNH0.Zq0jTcc8OjHvWla3y5DODDylTsawM3IpxnZ0qqG2KFI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/v1/contentbyiduser",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"v1",
+						"contentbyiduser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "searchcontent",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxNH0.Zq0jTcc8OjHvWla3y5DODDylTsawM3IpxnZ0qqG2KFI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/v1/searchbycontent?keyword=ss",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"v1",
+						"searchbycontent"
+					],
+					"query": [
+						{
+							"key": "keyword",
+							"value": "ss"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "postrespon",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxNH0.Zq0jTcc8OjHvWla3y5DODDylTsawM3IpxnZ0qqG2KFI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/v1/searchbycontent?keyword=ss",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"v1",
+						"searchbycontent"
+					],
+					"query": [
+						{
+							"key": "keyword",
+							"value": "ss"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getrespon",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxNH0.Zq0jTcc8OjHvWla3y5DODDylTsawM3IpxnZ0qqG2KFI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/v1/searchbycontent?keyword=ss",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"v1",
+						"searchbycontent"
+					],
+					"query": [
+						{
+							"key": "keyword",
+							"value": "ss"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "categories",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMX0.k12As9xeUqA8zjpmupl38yhxrifJcCwpQIzFa7D5-uk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/v1/categories",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"v1",
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "postcategory",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMX0.k12As9xeUqA8zjpmupl38yhxrifJcCwpQIzFa7D5-uk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/v1/categories",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"v1",
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "searchbycategory",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMX0.k12As9xeUqA8zjpmupl38yhxrifJcCwpQIzFa7D5-uk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/v1/searchbycategory?keyword=vidio",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"v1",
+						"searchbycategory"
+					],
+					"query": [
+						{
+							"key": "keyword",
+							"value": "vidio"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

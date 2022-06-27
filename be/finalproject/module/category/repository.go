@@ -8,6 +8,7 @@ type CategoryRepository interface {
 	FindByID(ID int) (Category, error)
 	Update(category Category) (Category, error)
 	Delete(ID int) (Category, error)
+	SearchCategoryByKeyword(keyword string) ([]Category, error)
 }
 
 type repository struct {
@@ -26,7 +27,7 @@ func (r *repository) Save(category Category) (Category, error) {
 		return category, err
 	}
 
-	sqlStmt = "SELECT * FROM category"
+	sqlStmt = `SELECT * FROM category ORDER BY id DESC LIMIT 1`
 
 	row := r.db.QueryRow(sqlStmt)
 	err = row.Scan(
@@ -42,7 +43,7 @@ func (r *repository) Save(category Category) (Category, error) {
 }
 
 func (r *repository) FetchAllCategories() ([]Category, error) {
-	var sqlStmt string = "SELECT * FROM category"
+	var sqlStmt string = `SELECT * FROM category`
 
 	rows, err := r.db.Query(sqlStmt)
 	if err != nil {
@@ -127,3 +128,23 @@ func (r *repository) Delete(ID int) (Category, error) {
 	return category, nil
 }
 
+func (r *repository) SearchCategoryByKeyword(keyword string) ([]Category, error) {
+	var sqlStmt string = `SELECT * FROM category WHERE name LIKE '%" + keyword + "%'`
+
+	rows, err := r.db.Query(sqlStmt)
+	if err != nil {
+		return nil, err
+	}
+
+	var categories []Category
+	for rows.Next() {
+		var category Category
+		err = rows.Scan(&category.ID, &category.Name, &category.Status)
+		if err != nil {
+			return nil, err
+		}
+		categories = append(categories, category)
+	}
+
+	return categories, nil
+}

@@ -55,6 +55,19 @@ func (h *categoryHandler) FetchAllCategories(c *gin.Context) {
 	c.JSON(http.StatusOK, response)
 }
 
+func (h *categoryHandler) SearchCategoryByKeyword(c *gin.Context) {
+	keyword := c.Query("keyword")
+	categories, err := h.categoryService.SearchCategoryByKeyword(keyword)
+	if err != nil {
+		response := helper.APIResponse("Data Kategori gagal ditampilkan", http.StatusBadRequest, "error", nil)
+		c.JSON(http.StatusBadRequest, response)
+		return
+	}
+	response := helper.APIResponse("Data kategori berhasil ditampilkan", http.StatusOK, "success", categories)
+
+	c.JSON(http.StatusOK, response)
+}
+
 func (h *categoryHandler) DeleteCategory(c *gin.Context) {
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {

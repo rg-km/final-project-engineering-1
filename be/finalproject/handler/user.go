@@ -10,16 +10,16 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type userHandler struct {
+type UserHandler struct {
 	userService usercamp.Service
 	authService auth.Service
 }
 
-func NewUserHandler(userService usercamp.Service, authService auth.Service) *userHandler {
-	return &userHandler{userService, authService}
+func NewUserHandler(userService usercamp.Service, authService auth.Service) *UserHandler {
+	return &UserHandler{userService, authService}
 }
 
-func (h *userHandler) RegisterUser(c *gin.Context) {
+func (h *UserHandler) RegisterUser(c *gin.Context) {
 	var input usercamp.RegisterUserInput
 
 	err := c.ShouldBindJSON(&input)
@@ -62,7 +62,7 @@ func (h *userHandler) RegisterUser(c *gin.Context) {
 	c.JSON(http.StatusOK, response)
 
 }
-func (h *userHandler) Login(c *gin.Context) {
+func (h *UserHandler) Login(c *gin.Context) {
 
 	var input usercamp.LoginInput
 
@@ -101,7 +101,7 @@ func (h *userHandler) Login(c *gin.Context) {
 
 }
 
-func (h *userHandler) FetchUserById(c *gin.Context) {
+func (h *UserHandler) FetchUserById(c *gin.Context) {
 
 	userID := c.MustGet("currentUser").(usercamp.User)
 	users, err := h.userService.GetUserByID(int(userID.ID))
@@ -116,7 +116,7 @@ func (h *userHandler) FetchUserById(c *gin.Context) {
 	c.JSON(http.StatusOK, response)
 }
 
-func (h *userHandler) UpdateUser(c *gin.Context) {
+func (h *UserHandler) UpdateUser(c *gin.Context) {
 	var input usercamp.UpdateUserInput
 	userID := c.MustGet("currentUser").(usercamp.User)
 	err := c.ShouldBindJSON(&input)

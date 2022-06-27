@@ -36,7 +36,7 @@ const Input: ForwardRefExoticComponent<Props> = forwardRef<
     },
     ref
   ) => {
-    const { name } = rest;
+    const { name, disabled } = rest;
     function togglePassword(e: any) {
       e.preventDefault();
       const target = e.currentTarget;
@@ -71,7 +71,8 @@ const Input: ForwardRefExoticComponent<Props> = forwardRef<
               "grow border border-gray-300 py-1 outline-none w-full",
               search ? "pl-8 pr-2" : "px-2",
               type === "password" ? "rounded-l" : "rounded",
-              type === "file" ? "hidden" : ""
+              type === "file" ? "hidden" : "",
+              disabled ? 'cursor-not-allowed bg-gray-200' : ''
             )}
             type={type}
             {...rest}

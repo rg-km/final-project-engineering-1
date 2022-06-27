@@ -16,6 +16,9 @@ type Repository interface {
 	FetchAllContent() ([]Content, error)
 	FetchAllContentAndUser() ([]ContentUser, error)
 	Delete(ID int) (Content, error)
+	SaveLike(content Content) (Content, error)
+	FindByIDContent(ID int64) (Content, error)
+	SearchContentByKeyword(keyword string) ([]Content, error)
 }
 
 type repository struct {
@@ -80,10 +83,38 @@ func (r *repository) SaveUpdate(content Content) (Content, error) {
 	return content, nil
 }
 
+func (r *repository) SaveLike(content Content) (Content, error) {
+	var sqlStmt string = `INSERT INTO likes (content_id, user_id) VALUES (?, ?);`
+
+	_, err := r.db.Exec(sqlStmt, content.ID, content.IDUser)
+
+	if err != nil {
+		return content, err
+	}
+	sqlStmt = `SELECT (SELECT COUNT(*) FROM likes l WHERE l.content_id = c.id) as likes, c.* FROM contents c WHERE id=?`
+
+	row := r.db.QueryRow(sqlStmt, content.ID)
+	err = row.Scan(
+		&content.Likes,
+		&content.ID,
+		&content.IDUser,
+		&content.IDCategory,
+		&content.Title,
+		&content.Subtitle,
+		&content.Deksripsi,
+		&content.Path,
+		&content.LastModified,
+	)
+	if err != nil {
+		return content, err
+	}
+	return content, nil
+}
+
 func (r *repository) FindByIDContentuser(ID int64) (Content, error) {
 	var content Content
 
-	var sqlStmt string = "SELECT * FROM contents WHERE iduser= ?"
+	var sqlStmt string = `SELECT * FROM contents WHERE iduser= ?`
 
 	row := r.db.QueryRow(sqlStmt, ID)
 	err := row.Scan(
@@ -151,7 +182,7 @@ func (r *repository) Update1(content Content) (Content, error) {
 	return content, nil
 }
 func (r *repository) FetchAllContent() ([]Content, error) {
-	var sqlStmt string = "SELECT * FROM contents"
+	var sqlStmt string = `SELECT (SELECT COUNT(*) FROM likes l WHERE l.content_id = c.id) as likes, c.* FROM contents c`
 
 	rows, err := r.db.Query(sqlStmt)
 	if err != nil {
@@ -162,6 +193,7 @@ func (r *repository) FetchAllContent() ([]Content, error) {
 	for rows.Next() {
 		var content Content
 		err = rows.Scan(
+			&content.Likes,
 			&content.ID,
 			&content.IDUser,
 			&content.IDCategory,
@@ -261,6 +293,57 @@ func (r *repository) Delete(ID int) (Content, error) {
 
 	sqlStmt = "DELETE FROM contents WHERE id=?"
 	_, err = r.db.Exec(sqlStmt, ID)
+	if err != nil {
+		return content, err
+	}
+
+	return content, nil
+}
+
+func (r *repository) SearchContentByKeyword(keyword string) ([]Content, error) {
+	var sqlStmt string = `SELECT * FROM contents WHERE title LIKE '%" + keyword + "%' OR subtitle LIKE '%" + keyword + "%' OR deskripsi LIKE '%" + keyword + "%'`
+
+	rows, err := r.db.Query(sqlStmt)
+	if err != nil {
+		return nil, err
+	}
+
+	var contents []Content
+	for rows.Next() {
+		var content Content
+		err = rows.Scan(
+			&content.ID,
+			&content.IDUser,
+			&content.IDCategory,
+			&content.Title,
+			&content.Subtitle,
+			&content.Deksripsi,
+			&content.Path,
+			&content.LastModified)
+		if err != nil {
+			return nil, err
+		}
+		contents = append(contents, content)
+	}
+
+	return contents, nil
+}
+func (r *repository) FindByIDContent(ID int64) (Content, error) {
+	var content Content
+
+	var sqlStmt string = `SELECT * FROM contents WHERE id= ?`
+
+	row := r.db.QueryRow(sqlStmt, ID)
+	err := row.Scan(
+		&content.ID,
+		&content.IDUser,
+		&content.IDCategory,
+		&content.Title,
+		&content.Subtitle,
+		&content.Deksripsi,
+		&content.Path,
+		&content.LastModified,
+	)
 	if err != nil {
 		return content, err
 	}

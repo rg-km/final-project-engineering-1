@@ -6,6 +6,7 @@ type CategoryService interface {
 	GetCategoryByID(ID int) (Category, error)
 	UpdateCategory(input FormUpdateCategoryInput) (Category, error)
 	DeleteCategory(ID int) (Category, error)
+	SearchCategoryByKeyword(keyword string) ([]Category, error)
 }
 
 type categoryService struct {
@@ -70,6 +71,15 @@ func (s *categoryService) DeleteCategory(ID int) (Category, error) {
 	}
 
 	if categories.ID == 0 {
+		return categories, err
+	}
+
+	return categories, err
+}
+
+func (s *categoryService) SearchCategoryByKeyword(keyword string) ([]Category, error) {
+	categories, err := s.repository.SearchCategoryByKeyword(keyword)
+	if err != nil {
 		return categories, err
 	}
 

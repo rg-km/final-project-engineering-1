@@ -11,7 +11,7 @@ export default function Comment({ data }: Props) {
   return (
     <div>
       {/* User Info */}
-      <div className="flex flex-row space-x-2 items-start px-2">
+      <div className="flex flex-row space-x-2 items-start px-2 pt-2">
         <img
           src="https://dummyimage.com/200.png"
           alt=""

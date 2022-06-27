@@ -17,7 +17,7 @@ type Props = {
 
 export default function Comments({ id, data, getData }: Props) {
   const { user } = useStore();
-  const { handleSubmit, register } = useForm();
+  const { handleSubmit, register, resetField } = useForm();
 
   const onSubmit = (data: any) => {
     console.log(data);
@@ -33,6 +33,7 @@ export default function Comments({ id, data, getData }: Props) {
             icon: "success",
             confirmButtonText: "Ok",
           }).then(() => getData());
+          resetField("answer");
         })
         .catch((err) => {
           console.log(err.response);
@@ -49,7 +50,7 @@ export default function Comments({ id, data, getData }: Props) {
   return (
     <div className="space-y-4">
       {/* Loop Comment */}
-      <div className="divide-y">
+      <div className="divide-y space-y-2">
         {data &&
           data.map((answer) => <Comment key={answer.id} data={answer} />)}
       </div>

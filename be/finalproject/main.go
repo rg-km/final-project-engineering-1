@@ -36,10 +36,8 @@ func dataBase() (db *sql.DB) {
 }
 
 func main() {
-
 	router := GetGinRoute()
 	router.Run(":8082")
-
 }
 
 func GetGinRoute() *gin.Engine {
@@ -118,8 +116,6 @@ func GetGinRoute() *gin.Engine {
 
 	router.GET("/contents", contentWebHandler.Index)
 	router.POST("/contents/delete/:id", contentWebHandler.DeleteContent)
-	router.Run(":8082")
-
 	return router
 }
 

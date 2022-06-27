@@ -1,9 +1,8 @@
 {
 	"info": {
-		"_postman_id": "9929212f-51ba-43d5-9504-fdec29b94c6b",
+		"_postman_id": "18372a9c-0e4c-48d4-8727-b17f61cc9d4c",
 		"name": "forumcamp",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "17884440"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
@@ -13,7 +12,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\":\"sjss\",\r\n    \"password\":\"eeee\",\r\n    \"email\":\"gsgh@gmail.com\"\r\n\r\n}"
+					"raw": "{\r\n    \"username\":\"test\",\r\n    \"password\":\"eeee\",\r\n    \"email\":\"angga11@gmail.com\"\r\n\r\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8082/api/v1/register",
@@ -38,7 +37,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"email\":\"gsgh@gmail.com\",\r\n    \"password\":\"eeee\"\r\n\r\n\r\n}"
+					"raw": "{\r\n    \"email\":\"gsgh@gmail.com\",\r\n    \"password\":\"eeee\"\r\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8082/api/v1/login",
@@ -67,7 +66,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxNH0.Zq0jTcc8OjHvWla3y5DODDylTsawM3IpxnZ0qqG2KFI",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxNX0.QH7L0dOOMjRUWuywe7Gp5jIJ50nSxsFOmkCVGb2Z9zo",
 							"type": "string"
 						}
 					]
@@ -76,7 +75,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"email\":\"gsgh@gmail.com\",\r\n    \"password\":\"eeee\"\r\n\r\n\r\n}"
+					"raw": "{\r\n    \"email\":\"angga@gmail.com\",\r\n    \"password\":\"eeeeaaaa\"\r\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8082/api/v1/userbyid",
@@ -102,7 +101,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxNH0.Zq0jTcc8OjHvWla3y5DODDylTsawM3IpxnZ0qqG2KFI",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxNX0.QH7L0dOOMjRUWuywe7Gp5jIJ50nSxsFOmkCVGb2Z9zo",
 							"type": "string"
 						}
 					]
@@ -111,7 +110,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\":\"sjshhs\",\r\n    \"password\":\"eeee\",\r\n    \"email\":\"gsgh@gmail.com\"\r\n\r\n}"
+					"raw": "{\r\n    \"username\":\"test123\",\r\n    \"password\":\"eeee\",\r\n    \"email\":\"gsgh@gmail.com\"\r\n\r\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8082/api/v1/updateuser",
@@ -137,7 +136,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxNH0.Zq0jTcc8OjHvWla3y5DODDylTsawM3IpxnZ0qqG2KFI",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxNX0.QH7L0dOOMjRUWuywe7Gp5jIJ50nSxsFOmkCVGb2Z9zo",
 							"type": "string"
 						}
 					]
@@ -146,7 +145,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \r\n   \"id_category\":2,\r\n   \"title\":\"Engglisui\",\r\n   \"subtitle\":\"interpersonal\",\r\n   \"deskripsi\":\"djdjdjdj\"\r\n\r\n}"
+					"raw": "{\r\n    \r\n   \"id_category\":2,\r\n   \"title\":\"backend aaaaaaa\",\r\n   \"subtitle\":\"interpersonal\",\r\n   \"deskripsi\":\"djdjdjdj\"\r\n\r\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8082/api/v1/content",
@@ -163,7 +162,7 @@
 					"query": [
 						{
 							"key": "deskripsi",
-							"value": "dd",
+							"value": "ddadadada",
 							"disabled": true
 						},
 						{
@@ -184,7 +183,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxNH0.Zq0jTcc8OjHvWla3y5DODDylTsawM3IpxnZ0qqG2KFI",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxNX0.QH7L0dOOMjRUWuywe7Gp5jIJ50nSxsFOmkCVGb2Z9zo",
 							"type": "string"
 						}
 					]
@@ -197,7 +196,7 @@
 						{
 							"key": "content",
 							"type": "file",
-							"src": "/C:/Users/LENOVO/Downloads/81838-sand-timer.gif"
+							"src": "/C:/Users/M. Angga/OneDrive/Pictures/ilustration/star.png"
 						}
 					]
 				},
@@ -246,10 +245,10 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \r\n   \"id_category\":2,\r\n   \"title\":\"Engglisui\",\r\n   \"subtitle\":\"interpersonal skill\",\r\n   \"deskripsi\":\"djdjdjdj\"\r\n\r\n}"
+					"raw": "{\r\n    \r\n   \"id_category\":2,\r\n   \"title\":\"englishh\",\r\n   \"subtitle\":\"interpersonal sskill\",\r\n   \"deskripsi\":\"djdjdjdj\"\r\n\r\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8082/api/v1/updatecontent/3",
+					"raw": "http://localhost:8082/api/v1/updatecontent/2",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -259,7 +258,7 @@
 						"api",
 						"v1",
 						"updatecontent",
-						"3"
+						"2"
 					],
 					"query": [
 						{
@@ -285,7 +284,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMX0.k12As9xeUqA8zjpmupl38yhxrifJcCwpQIzFa7D5-uk",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxNX0.QH7L0dOOMjRUWuywe7Gp5jIJ50nSxsFOmkCVGb2Z9zo",
 							"type": "string"
 						}
 					]
@@ -298,12 +297,12 @@
 						{
 							"key": "content",
 							"type": "file",
-							"src": "/C:/Users/LENOVO/Downloads/81838-sand-timer.gif"
+							"src": "/C:/Users/M. Angga/OneDrive/Pictures/ilustration/avatar.jpg"
 						}
 					]
 				},
 				"url": {
-					"raw": "http://localhost:8082/api/v1/updatemediacontent/2",
+					"raw": "http://localhost:8082/api/v1/updatemediacontent/5",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -313,7 +312,14 @@
 						"api",
 						"v1",
 						"updatemediacontent",
-						"2"
+						"5"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
 					]
 				}
 			},
@@ -406,7 +412,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxNH0.Zq0jTcc8OjHvWla3y5DODDylTsawM3IpxnZ0qqG2KFI",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxNX0.QH7L0dOOMjRUWuywe7Gp5jIJ50nSxsFOmkCVGb2Z9zo",
 							"type": "string"
 						}
 					]
@@ -418,7 +424,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8082/api/v1/searchbycontent?keyword=ss",
+					"raw": "http://localhost:8082/api/v1/searchbycontent?keyword=sjddf",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -432,7 +438,7 @@
 					"query": [
 						{
 							"key": "keyword",
-							"value": "ss"
+							"value": "sjddf"
 						}
 					]
 				}
@@ -441,28 +447,25 @@
 		},
 		{
 			"name": "postrespon",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"auth": {
 					"type": "bearer",
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxNH0.Zq0jTcc8OjHvWla3y5DODDylTsawM3IpxnZ0qqG2KFI",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxNX0.QH7L0dOOMjRUWuywe7Gp5jIJ50nSxsFOmkCVGb2Z9zo",
 							"type": "string"
 						}
 					]
 				},
-				"method": "GET",
+				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": ""
+					"raw": "{\r\n    \"id_content\": 4,\r\n    \"id_user\": 3,\r\n    \"answer\": \"test\"\r\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8082/api/v1/searchbycontent?keyword=ss",
+					"raw": "http://localhost:8082/api/v1/respon",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -471,13 +474,7 @@
 					"path": [
 						"api",
 						"v1",
-						"searchbycontent"
-					],
-					"query": [
-						{
-							"key": "keyword",
-							"value": "ss"
-						}
+						"respon"
 					]
 				}
 			},
@@ -506,7 +503,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8082/api/v1/searchbycontent?keyword=ss",
+					"raw": "http://localhost:8082/api/v1/responscontent/4",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -515,13 +512,8 @@
 					"path": [
 						"api",
 						"v1",
-						"searchbycontent"
-					],
-					"query": [
-						{
-							"key": "keyword",
-							"value": "ss"
-						}
+						"responscontent",
+						"4"
 					]
 				}
 			},
@@ -538,45 +530,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMX0.k12As9xeUqA8zjpmupl38yhxrifJcCwpQIzFa7D5-uk",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "http://localhost:8082/api/v1/categories",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8082",
-					"path": [
-						"api",
-						"v1",
-						"categories"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "postcategory",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMX0.k12As9xeUqA8zjpmupl38yhxrifJcCwpQIzFa7D5-uk",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxNX0.QH7L0dOOMjRUWuywe7Gp5jIJ50nSxsFOmkCVGb2Z9zo",
 							"type": "string"
 						}
 					]
@@ -614,7 +568,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMX0.k12As9xeUqA8zjpmupl38yhxrifJcCwpQIzFa7D5-uk",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxNX0.QH7L0dOOMjRUWuywe7Gp5jIJ50nSxsFOmkCVGb2Z9zo",
 							"type": "string"
 						}
 					]
@@ -626,7 +580,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8082/api/v1/searchbycategory?keyword=vidio",
+					"raw": "http://localhost:8082/api/v1/searchbycategory?keyword=Text",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -640,10 +594,129 @@
 					"query": [
 						{
 							"key": "keyword",
-							"value": "vidio"
+							"value": "Text"
 						}
 					]
 				}
+			},
+			"response": []
+		},
+		{
+			"name": "deletecategory",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxNX0.QH7L0dOOMjRUWuywe7Gp5jIJ50nSxsFOmkCVGb2Z9zo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8082/api/v1/categories/38",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"v1",
+						"categories",
+						"38"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updaterespon",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxNX0.QH7L0dOOMjRUWuywe7Gp5jIJ50nSxsFOmkCVGb2Z9zo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"answer\": \"aaaaaaaqweqweqweqweqw\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8082/api/v1/updaterespon/4",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"v1",
+						"updaterespon",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "postlikecontent",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxNX0.QH7L0dOOMjRUWuywe7Gp5jIJ50nSxsFOmkCVGb2Z9zo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id_content\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8082/api/v1/likecontent",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"v1",
+						"likecontent"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "postcategory",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
 			},
 			"response": []
 		}

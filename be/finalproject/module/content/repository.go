@@ -301,8 +301,7 @@ func (r *repository) Delete(ID int) (Content, error) {
 }
 
 func (r *repository) SearchContentByKeyword(keyword string) ([]Content, error) {
-	var sqlStmt string = `SELECT * FROM contents WHERE title LIKE '%" + keyword + "%' OR subtitle LIKE '%" + keyword + "%' OR deskripsi LIKE '%" + keyword + "%'`
-
+	var sqlStmt string = "SELECT (SELECT COUNT(*) FROM likes l WHERE l.content_id = c.id) as likes, c.* FROM contents c WHERE title LIKE '%" + keyword + "%' OR subtitle LIKE '%" + keyword + "%' OR deskripsi LIKE '%" + keyword + "%'"
 	rows, err := r.db.Query(sqlStmt)
 	if err != nil {
 		return nil, err
@@ -312,6 +311,7 @@ func (r *repository) SearchContentByKeyword(keyword string) ([]Content, error) {
 	for rows.Next() {
 		var content Content
 		err = rows.Scan(
+			&content.Likes,
 			&content.ID,
 			&content.IDUser,
 			&content.IDCategory,

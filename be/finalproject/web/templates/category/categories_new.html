@@ -1,12 +1,6 @@
 {{ define "content" }}
 <h2 class="mb-4">Create New Category</h2>
 
-{{ if .Error }}
-<div class="alert alert-danger">
-    {{ .Error }}
-</div>
-{{ end }}
-
 <div class="card mb-4">
     <div class="card-body">
         <form action="/create-category" method="POST">

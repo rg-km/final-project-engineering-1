@@ -129,7 +129,7 @@ func (r *repository) Delete(ID int) (Category, error) {
 }
 
 func (r *repository) SearchCategoryByKeyword(keyword string) ([]Category, error) {
-	var sqlStmt string = `SELECT * FROM category WHERE name LIKE '%" + keyword + "%'`
+	var sqlStmt string = "SELECT * FROM category WHERE name LIKE '%" + keyword + "%'"
 
 	rows, err := r.db.Query(sqlStmt)
 	if err != nil {

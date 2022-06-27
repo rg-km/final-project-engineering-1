@@ -101,21 +101,21 @@ func GetGinRoute() *gin.Engine {
 	router.GET("/admin/dashboard", dashboardWebHandler.Index)
 
 	router.GET("/admin/categories", categoryWebHandler.Index)
-	router.GET("/categories/new", categoryWebHandler.NewCategory)
-	router.POST("/create-category", categoryWebHandler.CreateCategory)
-	router.GET("/categories/edit/:id", categoryWebHandler.EditCategory)
-	router.POST("/categories/update/:id", categoryWebHandler.UpdateCategory)
-	router.POST("/categories/delete/:id", categoryWebHandler.DeleteCategory)
+	router.GET("/admin/categories/new", categoryWebHandler.NewCategory)
+	router.POST("/admin/create-category", categoryWebHandler.CreateCategory)
+	router.GET("/admin/categories/edit/:id", categoryWebHandler.EditCategory)
+	router.POST("/admin/categories/update/:id", categoryWebHandler.UpdateCategory)
+	router.POST("/admin/categories/delete/:id", categoryWebHandler.DeleteCategory)
 
 	router.GET("/admin/users", userWebHandler.Index)
-	router.GET("/users/new", userWebHandler.NewUser)
-	router.POST("/create-user", userWebHandler.CreateUser)
-	router.GET("/users/edit/:id", userWebHandler.EditUser)
-	router.POST("/users/update/:id", userWebHandler.UpdateUser)
-	router.POST("/users/delete/:id", userWebHandler.DeleteUser)
+	router.GET("/admin/users/new", userWebHandler.NewUser)
+	router.POST("/admin/create-user", userWebHandler.CreateUser)
+	router.GET("/admin/users/edit/:id", userWebHandler.EditUser)
+	router.POST("/admin/users/update/:id", userWebHandler.UpdateUser)
+	router.POST("/admin/users/delete/:id", userWebHandler.DeleteUser)
 
 	router.GET("/admin/contents", contentWebHandler.Index)
-	router.POST("/contents/delete/:id", contentWebHandler.DeleteContent)
+	router.POST("/admin/contents/delete/:id", contentWebHandler.DeleteContent)
 	return router
 }
 

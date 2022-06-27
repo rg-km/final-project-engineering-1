@@ -77,7 +77,6 @@ func GetGinRoute() *gin.Engine {
 	api.POST("/content", middleware.AuthMiddleware(authService, userService), contentHandler.SaveContent)
 	api.GET("/contents", middleware.AuthMiddleware(authService, userService), contentHandler.FetchAllContentss)
 	api.GET("/contentbyiduser", middleware.AuthMiddleware(authService, userService), contentHandler.FetchContentByiduser)
-	api.PUT("/updatecontent/:id", middleware.AuthMiddleware(authService, userService), contentHandler.SaveContentUpdate)
 	api.GET("/searchbycontent", middleware.AuthMiddleware(authService, userService), contentHandler.SearchContentByKeyword)
 	api.PUT("/updatecontent/:id", middleware.AuthMiddleware(authService, userService), contentHandler.SaveContentUpdate)
 	api.POST("/likecontent", middleware.AuthMiddleware(authService, userService), contentHandler.ActionlikeContent)

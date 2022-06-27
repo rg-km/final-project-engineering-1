@@ -14,6 +14,7 @@ export interface Question {
   deksripsi: string;
   path: string;
   last_modified: string;
+  username: string;
 }
 
 export interface Answer {

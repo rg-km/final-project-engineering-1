@@ -45,7 +45,7 @@ export default function CardQuestion({ data }: Props) {
                 {labelCategory(data?.id_category)}
               </div>
               <div className="space-x-2 text-xs">
-                <span className="text-primary">{data?.id_user}</span>
+                <span className="text-primary">{data?.username}</span>
                 <span className="text-gray-400">
                   {moment(data.last_modified).fromNow()}
                 </span>

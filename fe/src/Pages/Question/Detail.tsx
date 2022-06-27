@@ -63,7 +63,7 @@ export default function Detail({}: Props) {
             className="w-12 h-12 aspect-square rounded-full"
           />
           <div>
-            <p className="font-bold">{data?.id_user}</p>
+            <p className="font-bold">{data?.username}</p>
             <p className="text-sm">
               {data?.last_modified ? moment(data.last_modified).fromNow() : "-"}
             </p>

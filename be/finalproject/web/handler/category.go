@@ -53,7 +53,7 @@ func (h *categoryHandler) CreateCategory(c *gin.Context) {
 		c.HTML(http.StatusInternalServerError, "error.html", nil)
 		return
 	}
-	c.Redirect(http.StatusFound, "/categories")
+	c.Redirect(http.StatusFound, "/admin/categories")
 }
 
 func (h *categoryHandler) EditCategory(c *gin.Context) {
@@ -82,7 +82,7 @@ func (h *categoryHandler) UpdateCategory(c *gin.Context) {
 		c.HTML(http.StatusInternalServerError, "error.html", nil)
 		return
 	}
-	c.Redirect(http.StatusFound, "/categories")
+	c.Redirect(http.StatusFound, "/admin/categories")
 }
 
 func (h *categoryHandler) DeleteCategory(c *gin.Context) {
@@ -95,5 +95,5 @@ func (h *categoryHandler) DeleteCategory(c *gin.Context) {
 		return
 	}
 
-	c.Redirect(http.StatusFound, "/categories")
+	c.Redirect(http.StatusFound, "/admin/categories")
 }

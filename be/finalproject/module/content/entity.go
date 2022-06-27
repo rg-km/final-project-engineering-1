@@ -5,17 +5,16 @@ import (
 )
 
 type Content struct {
-	Username     string
-	ID           int64 `url:"id" json:"id"`
-	Likes        int64
-	IDUser       int64
-	Namecategory string
-	IDCategory   int64
-	Title        string
-	Subtitle     string
-	Deksripsi    string
-	Path         string
-	LastModified time.Time
+	ID           int64     `url:"id" json:"id"`
+	Likes        int64     `json:"likes"`
+	IDUser       int64     `json:"id_user"`
+	IDCategory   int64     `json:"id_category"`
+	Title        string    `json:"title"`
+	Subtitle     string    `json:"subtitle"`
+	Deksripsi    string    `json:"deksripsi"`
+	Path         string    `json:"path"`
+	LastModified time.Time `json:"last_modified"`
+	Username     string    `json:"username"`
 }
 
 type ContentUser struct {

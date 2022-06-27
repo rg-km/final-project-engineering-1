@@ -47,7 +47,7 @@ func (h *userHandler) CreateUser(c *gin.Context) {
 	userInput.Role = input.Role
 
 	_, _ = h.userService.CreateUserAdmin(userInput)
-	c.Redirect(http.StatusFound, "/users")
+	c.Redirect(http.StatusFound, "/admin/users")
 }
 
 func (h *userHandler) EditUser(c *gin.Context) {
@@ -87,7 +87,7 @@ func (h *userHandler) UpdateUser(c *gin.Context) {
 		c.HTML(http.StatusInternalServerError, "error.html", nil)
 		return
 	}
-	c.Redirect(http.StatusFound, "/users")
+	c.Redirect(http.StatusFound, "/admin/users")
 }
 
 func (h *userHandler) DeleteUser(c *gin.Context) {
@@ -100,5 +100,5 @@ func (h *userHandler) DeleteUser(c *gin.Context) {
 		return
 	}
 
-	c.Redirect(http.StatusFound, "/users")
+	c.Redirect(http.StatusFound, "/admin/users")
 }

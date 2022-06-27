@@ -98,23 +98,23 @@ func GetGinRoute() *gin.Engine {
 	userWebHandler := webHandler.NewUserHandler(userService)
 	contentWebHandler := webHandler.NewContentHandler(contentService)
 
-	router.GET("/dashboard", dashboardWebHandler.Index)
+	router.GET("/admin/dashboard", dashboardWebHandler.Index)
 
-	router.GET("/categories", categoryWebHandler.Index)
+	router.GET("/admin/categories", categoryWebHandler.Index)
 	router.GET("/categories/new", categoryWebHandler.NewCategory)
 	router.POST("/create-category", categoryWebHandler.CreateCategory)
 	router.GET("/categories/edit/:id", categoryWebHandler.EditCategory)
 	router.POST("/categories/update/:id", categoryWebHandler.UpdateCategory)
 	router.POST("/categories/delete/:id", categoryWebHandler.DeleteCategory)
 
-	router.GET("/users", userWebHandler.Index)
+	router.GET("/admin/users", userWebHandler.Index)
 	router.GET("/users/new", userWebHandler.NewUser)
 	router.POST("/create-user", userWebHandler.CreateUser)
 	router.GET("/users/edit/:id", userWebHandler.EditUser)
 	router.POST("/users/update/:id", userWebHandler.UpdateUser)
 	router.POST("/users/delete/:id", userWebHandler.DeleteUser)
 
-	router.GET("/contents", contentWebHandler.Index)
+	router.GET("/admin/contents", contentWebHandler.Index)
 	router.POST("/contents/delete/:id", contentWebHandler.DeleteContent)
 	return router
 }

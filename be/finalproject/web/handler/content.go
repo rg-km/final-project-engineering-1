@@ -36,5 +36,5 @@ func (h *contentHandler) DeleteContent(c *gin.Context) {
 		fmt.Println(err)
 	}
 
-	c.Redirect(http.StatusFound, "/contents")
+	c.Redirect(http.StatusFound, "/admin/contents")
 }

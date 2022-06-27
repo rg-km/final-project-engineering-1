@@ -41,11 +41,15 @@ export default function Login({}: Props) {
     setIsLoading(true);
     Axios.post("/login", data)
       .then((res) => {
-        const {token} = res.data.data;
+        const {token, role} = res.data.data;
         Cookies.set("token", token);
         toast.success("Success login");
         setUser(res.data.data)
-        navigate('/')
+        if (role === "admin") {
+          navigate('/admin/dashboard');
+        } else {
+          navigate('/')
+        }
       })
       .catch((err) => {
         const response = err.response;

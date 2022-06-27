@@ -182,7 +182,7 @@ func (r *repository) Update1(content Content) (Content, error) {
 	return content, nil
 }
 func (r *repository) FetchAllContent() ([]Content, error) {
-	var sqlStmt string = `SELECT (SELECT COUNT(*) FROM likes l WHERE l.content_id = c.id) as likes, c.* FROM contents c`
+	var sqlStmt string = `SELECT (SELECT COUNT(*) FROM likes l WHERE l.content_id = c.id) as likes, c.*, u.username FROM contents c INNER JOIN users u ON c.id = u.id`
 
 	rows, err := r.db.Query(sqlStmt)
 	if err != nil {
@@ -201,7 +201,8 @@ func (r *repository) FetchAllContent() ([]Content, error) {
 			&content.Subtitle,
 			&content.Deksripsi,
 			&content.Path,
-			&content.LastModified)
+			&content.LastModified,
+			&content.Username)
 		if err != nil {
 			return nil, err
 		}

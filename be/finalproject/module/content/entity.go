@@ -14,6 +14,7 @@ type Content struct {
 	Deksripsi    string    `json:"deksripsi"`
 	Path         string    `json:"path"`
 	LastModified time.Time `json:"last_modified"`
+	Username     string    `json:"username"`
 }
 
 type ContentUser struct {

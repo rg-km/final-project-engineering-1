@@ -46,7 +46,7 @@ export default function Login({}: Props) {
         toast.success("Success login");
         setUser(res.data.data)
         if (role === "admin") {
-          navigate('/admin/dashboard');
+          navigate('/admin');
         } else {
           navigate('/')
         }

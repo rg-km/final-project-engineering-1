@@ -15,7 +15,7 @@ import * as yup from "yup";
 type Props = {};
 
 type Values = {
-  name: string;
+  username: string;
   password: string;
   email: string;
 };
@@ -23,7 +23,7 @@ type Values = {
 const schema = yup
   .object()
   .shape({
-    name: yup.string().required(),
+    username: yup.string().required(),
     email: yup.string().email().required(),
     password: yup.string().min(8).required(),
   })
@@ -100,8 +100,8 @@ export default function Register({}: Props) {
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
             <Input
               label="Nama Lengkap"
-              {...register("name")}
-              error={errors.name?.message}
+              {...register("username")}
+              error={errors.username?.message}
             />
             <Input
               label="Email"

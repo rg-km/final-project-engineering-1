@@ -1,7 +1,7 @@
 {{ define "content" }}
 <h2 class="mb-4">List of User</h2>
 
-<a href="/users/new" class=" btn btn-primary mb-3"><i class="fa fa-plus"></i> New Users</a>
+<a href="/admin/users/new" class=" btn btn-primary mb-3"><i class="fa fa-plus"></i> New Users</a>
 
 <div class="card mb-4">
     <div class="card-body">
@@ -21,9 +21,9 @@
                     <td>{{ .Email }}</td>
                     <td>{{ .Role }}</td>
                     <td>
-                        <a href="/users/edit/{{ .ID }}" class="btn btn-primary d-inline"><i class="fa fa-edit"></i></a>
+                        <a href="/admin/users/edit/{{ .ID }}" class="btn btn-primary d-inline"><i class="fa fa-edit"></i></a>
 
-                        <form action="/users/delete/{{ .ID }}" method="post" class="d-inline">
+                        <form action="/admin/users/delete/{{ .ID }}" method="post" class="d-inline">
                             <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button>
                         </form>
 

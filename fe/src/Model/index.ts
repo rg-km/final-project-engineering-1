@@ -18,10 +18,10 @@ export interface Question {
 }
 
 export interface Answer {
-  Answer: string;
-  CreatedAt: string;
-  IDContent: number;
-  IDUser: number;
-  Status: boolean;
+  answer: string;
+  created_at: string;
+  id_content: number;
+  id_user: number;
+  status: boolean;
   id: number;
 }

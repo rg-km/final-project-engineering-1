@@ -19,10 +19,10 @@ export default function Comment({ data }: Props) {
         />
         <div className="">
           <div className="flex flex-row space-x-2 items-center">
-            <p className="font-bold">{data.IDUser}</p>
-            <p className="text-sm">{data.CreatedAt ? moment(data.CreatedAt).fromNow() : '-'}</p>
+            <p className="font-bold">{data.id_user}</p>
+            <p className="text-sm">{data.created_at ? moment(data.created_at).fromNow() : '-'}</p>
           </div>
-          <p>{data.Answer}</p>
+          <p>{data.answer}</p>
           {/* Like Dislike */}
           {/* <div className="flex flex-row items-center space-x-2 py-2">
             <div className="flex flex-row space-x-2 items-center justify-end text-lg">

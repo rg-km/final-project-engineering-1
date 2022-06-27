@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Layout from "./Components/Layout";
 import Login from "./Pages/auth/login";
 import Register from "./Pages/auth/register";
@@ -26,6 +26,7 @@ function App() {
           </Route>
           <Route path="about" element={<About/>} />
           <Route path="profile" element={<Profile/>} />
+          <Route path="admin" element={<Navigate to="/admin/dashboard" replace />} />
           <Route path="*" element={<NotFound />} />
           <Route path="auth">
             <Route path="login" element={<Login />} />

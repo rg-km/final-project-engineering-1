@@ -35,6 +35,7 @@ func (r *repository) Save(user User) (User, error) {
 		&user.Username,
 		&user.Password,
 		&user.Email,
+		&user.Role,
 	)
 	if err != nil {
 		return user, err
@@ -52,6 +53,7 @@ func (r *repository) FindByEmail(email string) (User, error) {
 		&user.Username,
 		&user.Password,
 		&user.Email,
+		&user.Role,
 	)
 
 	if err != nil {
@@ -71,6 +73,7 @@ func (r *repository) FindByID(ID int) (User, error) {
 		&user.Username,
 		&user.Password,
 		&user.Email,
+		&user.Role,
 	)
 	if err != nil {
 		return user, err
@@ -79,9 +82,9 @@ func (r *repository) FindByID(ID int) (User, error) {
 	return user, nil
 }
 func (r *repository) Updateuserrepo(user User) (User, error) {
-	var sqlStmt string = "UPDATE users SET username=?, password=?, email=? WHERE id=? "
+	var sqlStmt string = "UPDATE users SET username=?, password=?, email=?, role=? WHERE id=? "
 
-	_, err := r.db.Exec(sqlStmt, user.Username, user.Password, user.Email, user.ID)
+	_, err := r.db.Exec(sqlStmt, user.Username, user.Password, user.Email, user.Role, user.ID)
 
 	if err != nil {
 		return user, err
@@ -94,6 +97,48 @@ func (r *repository) Updateuserrepo(user User) (User, error) {
 		&user.Username,
 		&user.Password,
 		&user.Email,
+		&user.Role,
+	)
+	if err != nil {
+		return user, err
+	}
+
+	return user, nil
+}
+
+func (r *repository) FetchAllUser() ([]User, error) {
+	var sqlStmt string = "SELECT * FROM users ORDER BY id ASC"
+
+	rows, err := r.db.Query(sqlStmt)
+	if err != nil {
+		return nil, err
+	}
+
+	var users []User
+	for rows.Next() {
+		var user User
+		err = rows.Scan(&user.ID, &user.Username, &user.Password, &user.Email, &user.Role)
+		if err != nil {
+			return nil, err
+		}
+		users = append(users, user)
+	}
+
+	return users, nil
+}
+
+func (r *repository) Delete(ID int) (User, error) {
+	var user User
+
+	var sqlStmt = "SELECT * FROM users WHERE id=?"
+
+	row := r.db.QueryRow(sqlStmt, ID)
+	err := row.Scan(
+		&user.ID,
+		&user.Username,
+		&user.Password,
+		&user.Email,
+		&user.Role,
 	)
 
 	if err != nil {

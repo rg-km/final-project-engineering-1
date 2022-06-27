@@ -6,6 +6,9 @@ type Service interface {
 	SaveMedia(ID int64, fileLocation string) (Content, error)
 	SaveMediaid(ID int64, fileLocation string, idcontent int64) (Content, error)
 	FetchAllContents() ([]Content, error)
+	FetchContentbyid(ID int64) ([]Content, error)
+	FetchAllContentAndUser() ([]ContentUser, error)
+	DeleteContent(ID int) (Content, error)
 	FetchAllContentbyiduser(ID int64) ([]Content, error)
 	SearchContentByKeyword(keyword string) ([]Content, error)
 	ActionLike(ID int64, input FormLikeContentInput) (Content, error)
@@ -92,6 +95,33 @@ func (s *service) FetchAllContents() ([]Content, error) {
 	}
 
 	return contentss, err
+}
+
+func (s *service) FetchContentbyid(ID int64) ([]Content, error) {
+	contents, err := s.repository.FindAllByIDContentuser(ID)
+	if err != nil {
+		return contents, err
+	}
+
+	return contents, err
+}
+
+func (s *service) FetchAllContentAndUser() ([]ContentUser, error) {
+	contents, err := s.repository.FetchAllContentAndUser()
+	if err != nil {
+		return contents, err
+	}
+
+	return contents, err
+}
+
+func (s *service) DeleteContent(ID int) (Content, error) {
+	content, err := s.repository.Delete(ID)
+	if err != nil {
+		return content, err
+	}
+
+	return content, nil
 }
 
 func (s *service) FetchAllContentbyiduser(ID int64) ([]Content, error) {

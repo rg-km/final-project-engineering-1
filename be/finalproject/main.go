@@ -4,11 +4,14 @@ import (
 	"database/sql"
 	"finalproject/auth"
 	"finalproject/middleware"
+	"path/filepath"
 
 	"finalproject/module/category"
 	"finalproject/module/content"
+	"finalproject/module/dashboard"
 	"finalproject/module/respon"
 	usercamp "finalproject/module/user"
+	webHandler "finalproject/web/handler"
 
 	"finalproject/handler"
 
@@ -55,15 +58,17 @@ func GetGinRoute() *gin.Engine {
 	categoryRepository := category.NewRepository(dataBase())
 	categoryService := category.NewService(categoryRepository)
 	categoryHandler := handler.NewCategoryHandler(categoryService)
-	authService := auth.NewService()
+
+	DashboardRepository := dashboard.NewRepository(dataBase())
+	DashboardService := dashboard.NewService(DashboardRepository)
 	router := gin.Default()
+	api := router.Group("api/v1")
 
 	router.HTMLRender = loadTemplates("./web/templates")
 	router.Static("/css", "./web/assets/css")
 	router.Static("/js", "./web/assets/js")
 	router.Static("/webfonts", "./web/assets/webfonts")
 
-	api := router.Group("api/v1")
 	api.POST("/register", userHandler.RegisterUser)
 	api.POST("/login", userHandler.Login)
 	api.GET("/userbyid", middleware.AuthMiddleware(authService, userService), userHandler.FetchUserById)
@@ -87,5 +92,55 @@ func GetGinRoute() *gin.Engine {
 	api.GET("/categories", middleware.AuthMiddleware(authService, userService), categoryHandler.FetchAllCategories)
 	api.GET("/searchbycategory", middleware.AuthMiddleware(authService, userService), categoryHandler.SearchCategoryByKeyword)
 
-	return router // TODO: replace this
+	api.DELETE("/categories/:id", middleware.AuthMiddleware(authService, userService), categoryHandler.DeleteCategory)
+
+	// CMS ADMIN
+	dashboardWebHandler := webHandler.NewDashboardHandler(DashboardService)
+	categoryWebHandler := webHandler.NewCategoryHandler(categoryService)
+	userWebHandler := webHandler.NewUserHandler(userService)
+	contentWebHandler := webHandler.NewContentHandler(contentService)
+
+	router.GET("/dashboard", dashboardWebHandler.Index)
+
+	router.GET("/categories", categoryWebHandler.Index)
+	router.GET("/categories/new", categoryWebHandler.NewCategory)
+	router.POST("/create-category", categoryWebHandler.CreateCategory)
+	router.GET("/categories/edit/:id", categoryWebHandler.EditCategory)
+	router.POST("/categories/update/:id", categoryWebHandler.UpdateCategory)
+	router.POST("/categories/delete/:id", categoryWebHandler.DeleteCategory)
+
+	router.GET("/users", userWebHandler.Index)
+	router.GET("/users/new", userWebHandler.NewUser)
+	router.POST("/create-user", userWebHandler.CreateUser)
+	router.GET("/users/edit/:id", userWebHandler.EditUser)
+	router.POST("/users/update/:id", userWebHandler.UpdateUser)
+	router.POST("/users/delete/:id", userWebHandler.DeleteUser)
+
+	router.GET("/contents", contentWebHandler.Index)
+	router.POST("/contents/delete/:id", contentWebHandler.DeleteContent)
+	router.Run(":8082")
+
+	return router
+}
+
+func loadTemplates(templatesDir string) multitemplate.Renderer {
+	r := multitemplate.NewRenderer()
+
+	layouts, err := filepath.Glob(templatesDir + "/layouts/*")
+	if err != nil {
+		panic(err.Error())
+	}
+
+	includes, err := filepath.Glob(templatesDir + "/**/*")
+	if err != nil {
+		panic(err.Error())
+	}
+
+	for _, include := range includes {
+		layoutCopy := make([]string, len(layouts))
+		copy(layoutCopy, layouts)
+		files := append(layoutCopy, include)
+		r.AddFromFiles(filepath.Base(include), files...)
+	}
+	return r
 }

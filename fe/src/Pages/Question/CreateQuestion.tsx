@@ -43,7 +43,7 @@ export default function CreateQuestion({}: Props) {
 
   const onSubmit = (data: Values) => {
     setIsLoading(true);
-    Axios.post("/content", data)
+    Axios.post("/content", { ...data, subtitle: "a" })
       .then(() => {
         Swal.fire({
           title: "Pertanyaan berhasil dibuat",
@@ -61,9 +61,7 @@ export default function CreateQuestion({}: Props) {
     setIsLoading(true);
     Axios.get("/categories")
       .then((res) => {
-        const data = res.data.data
-          .filter((cat: any) => cat.status)
-          .map((cat: any) => ({ value: cat.id, label: cat.name }));
+        const data = res.data.data;
         setCategories(data);
       })
       .catch((err) => {
@@ -74,7 +72,11 @@ export default function CreateQuestion({}: Props) {
   };
 
   useEffect(() => {
-    getCategories();
+    if (categories.length === 0) {
+      getCategories();
+    } else {
+      setIsLoading(false);
+    }
     return () => setIsLoading(true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -102,7 +104,12 @@ export default function CreateQuestion({}: Props) {
           render={({ field: { onChange, value } }) => (
             <Select
               label="Kategori"
-              options={categories}
+              options={
+                categories.map((item) => ({
+                  label: item.name,
+                  value: item.id,
+                })) || []
+              }
               onChange={onChange}
               value={value}
               error={errors.id_category?.message}

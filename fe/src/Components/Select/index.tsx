@@ -6,7 +6,7 @@ type Props = {
   onChange: (...event: any[]) => void;
   value: any;
   label?: string;
-  options: { value: string | number; label: string }[];
+  options: { value: any; label: string }[];
   name?: string;
   info?: string | ReactNode;
   infoType?: "info" | "danger" | "primary" | "success";

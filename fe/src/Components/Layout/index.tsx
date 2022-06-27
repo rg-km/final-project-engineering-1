@@ -20,13 +20,13 @@ export default function Layout({}: Props) {
         <div
           className={classNames(
             !location.pathname.includes("/auth")
-              ? "flex flex-row space-x-14"
+              ? "flex flex-col md:flex-row space-x-0 space-y-4 md:space-y-0 md:space-x-14"
               : ""
           )}
         >
           {/* LEFT SECTION */}
           {!location.pathname.includes("/auth") && (
-            <div className="border w-2/12 px-8 py-5 space-y-4 text-justify p-10">
+            <div className="border w-full md:w-2/12 px-8 py-5 space-y-4 text-justify p-10">
               <strong>Forum</strong>
               <h1></h1>
               <strong>Tags</strong>
@@ -37,14 +37,14 @@ export default function Layout({}: Props) {
           {/* CONTENT */}
           <div
             className={classNames(
-              !location.pathname.includes("/auth") ? "w-7/12" : ""
+              !location.pathname.includes("/auth") ? "w-full md:w-7/12" : ""
             )}
           >
             <Outlet />
           </div>
           {/* RIGHT SECTION */}
           {!location.pathname.includes("/auth") && (
-            <div className="border flex-auto space-y-4 w-2 py-3 px-5 text-justify">
+            <div className="w-full md:w-2/12 border flex-auto space-y-4 py-3 px-5 text-justify">
               <strong>Selamat Datang CAMP!</strong>
               <p>Ikuti Instagram kami untuk update terbaru.</p>
               <p>

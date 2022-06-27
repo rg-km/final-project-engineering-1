@@ -1,5 +1,6 @@
+import moment from "moment";
 import React from "react";
-import { Answer } from "../../store/store";
+import { Answer } from "../../Model";
 import { ChatIcon, LikeIcon } from "../Icons";
 
 type Props = {
@@ -18,10 +19,10 @@ export default function Comment({ data }: Props) {
         />
         <div className="">
           <div className="flex flex-row space-x-2 items-center">
-            <p className="font-bold">{data.author}</p>
-            <p className="text-sm">{data.created_at}</p>
+            <p className="font-bold">{data.IDUser}</p>
+            <p className="text-sm">{data.CreatedAt ? moment(data.CreatedAt).fromNow() : '-'}</p>
           </div>
-          <p>{data.content}</p>
+          <p>{data.Answer}</p>
           {/* Like Dislike */}
           {/* <div className="flex flex-row items-center space-x-2 py-2">
             <div className="flex flex-row space-x-2 items-center justify-end text-lg">

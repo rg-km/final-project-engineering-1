@@ -8,7 +8,7 @@ export const Axios = axios.create({
 Axios.interceptors.request.use((config: any) => {
   const token = Cookies.get("token");
   if (token) {
-    config.headers.Authorization = token;
+    config.headers.Authorization = `Bearer ${token}`;
   }
   return config;
 });

@@ -7,11 +7,13 @@ import Input from "../Input";
 import Dropdown, { Item } from "../Dropdown";
 import { useEffect } from "react";
 import { isExpired, decodeToken } from "react-jwt";
+import { Axios } from "../../api";
+import { toast } from "react-toastify";
 
 type Props = {};
 
 export default function Header({}: Props) {
-  const { user } = useStore();
+  const { user, setIsLoading, setCategories } = useStore();
   const token = Cookies.get("token");
   let navigate = useNavigate();
 
@@ -28,6 +30,17 @@ export default function Header({}: Props) {
     },
   ];
 
+  const getCategories = () => {
+    setIsLoading(true);
+    Axios.get("/categories")
+      .then((res) => setCategories(res.data.data))
+      .catch((err) => {
+        console.log(err.response);
+        toast.error("Failed to get data categories");
+      })
+      .finally(() => setIsLoading(false));
+  };
+
   function handleLogout() {
     Cookies.remove("token");
     navigate("/auth/login");
@@ -37,6 +50,7 @@ export default function Header({}: Props) {
     if (!user) {
       handleLogout();
     }
+    getCategories();
   }, [user]);
 
   return (

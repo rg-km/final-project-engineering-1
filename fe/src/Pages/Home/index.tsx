@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Button from "../../Components/Button";
 import CardQuestion from "../../Components/Cards/CardQuestion";
 import useStore from "../../store/store";
@@ -6,12 +6,12 @@ import useStore from "../../store/store";
 type Props = {};
 
 export default function Home({}: Props) {
-  const { setIsLoading } = useStore();
+  const { setIsLoading, questions } = useStore();
 
   useEffect(() => {
     setIsLoading(false);
     return () => setIsLoading(true);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -21,11 +21,9 @@ export default function Home({}: Props) {
         <Button label="Buat Pertanyaan Baru" primary to="/question/create" />
       </div>
       <div className="space-y-4">
-        <CardQuestion id="1" />
-        <CardQuestion id="2" />
-        <CardQuestion id="3" />
-        <CardQuestion id="4" />
-        <CardQuestion id="5" />
+        {questions.map((item) => (
+          <CardQuestion key={item.id} data={item} />
+        ))}
       </div>
     </div>
   );

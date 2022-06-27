@@ -60,7 +60,7 @@ func (r *repository) FetchAllCategories() ([]Category, error) {
 	return categories, nil
 }
 func (r *repository) SearchCategoryByKeyword(keyword string) ([]Category, error) {
-	var sqlStmt string = `SELECT * FROM category WHERE name LIKE '%" + keyword + "%'`
+	var sqlStmt string = "SELECT * FROM category WHERE name LIKE '%" + keyword + "%'"
 
 	rows, err := r.db.Query(sqlStmt)
 	if err != nil {

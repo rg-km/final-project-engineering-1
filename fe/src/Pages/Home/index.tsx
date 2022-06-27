@@ -36,9 +36,9 @@ export default function Home({}: Props) {
         <Button label="Buat Pertanyaan Baru" primary to="/question/create" />
       </div>
       <div className="space-y-4">
-        {questions.map((item) => (
-          <CardQuestion key={item.id} data={item} />
-        ))}
+        {questions && questions.length > 0
+          ? questions.map((item) => <CardQuestion key={item.id} data={item} getData={getData}/>)
+          : "Tidak Ada Data"}
       </div>
     </div>
   );

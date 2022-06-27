@@ -9,12 +9,14 @@ import { useEffect } from "react";
 import { isExpired, decodeToken } from "react-jwt";
 import { Axios } from "../../api";
 import { toast } from "react-toastify";
+import { useForm } from "react-hook-form";
 
 type Props = {};
 
 export default function Header({}: Props) {
-  const { user, setIsLoading, setCategories } = useStore();
+  const { user, setIsLoading, setCategories, setQuestions } = useStore();
   const token = Cookies.get("token");
+  const { handleSubmit, register } = useForm();
   let navigate = useNavigate();
 
   const items: Item[] = [
@@ -39,6 +41,32 @@ export default function Header({}: Props) {
         toast.error("Failed to get data categories");
       })
       .finally(() => setIsLoading(false));
+  };
+
+  const onSubmit = (data: any) => {
+    setIsLoading(true);
+    if (data.keyword) {
+      Axios.get("/searchbycontent", { params: data })
+        .then((res) => setQuestions(res.data.data))
+        .catch((err) => {
+          console.log(err.response);
+          toast.error("Failed to get data questions");
+        })
+        .finally(() => setIsLoading(false));
+    } else {
+      Axios.get("/contents")
+        .then((res) => {
+          const data = res.data.data;
+          console.log(data)
+          setQuestions(data || []);
+        })
+        .catch((err) => {
+          console.log(err.response);
+          toast.error("Failed to get data");
+        })
+        .finally(() => setIsLoading(false));
+    }
+    console.log(data);
   };
 
   function handleLogout() {
@@ -69,9 +97,13 @@ export default function Header({}: Props) {
           className="rounded-full text-sm"
         />
       </div>
-      <div className="w-full">
-        <Input placeholder="Ketik disini untuk mencari.." search />
-      </div>
+      <form onSubmit={handleSubmit(onSubmit)} className="w-full">
+        <Input
+          placeholder="Ketik disini untuk mencari.."
+          search
+          {...register("keyword")}
+        />
+      </form>
       {user && user.username ? (
         <div className="flex flex-row space-x-2 items-center">
           <Dropdown

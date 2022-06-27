@@ -2,7 +2,7 @@ import { classNames } from "../../Utils/classNames";
 import { Link } from "react-router-dom";
 
 type Props = {
-  label: string;
+  label?: string;
   className?: string;
   icon?: any;
   iconPlacement?: "left" | "right";
@@ -17,7 +17,7 @@ type Props = {
   medium?: boolean;
   bold?: boolean;
   to?: string;
-  onClick?: () => void;
+  onClick?: (e?: any) => void;
 };
 
 export default function Button({
@@ -58,19 +58,21 @@ export default function Button({
         {iconPlacement === "left" && icon && (
           <span className={iconClass}>{icon}</span>
         )}
-        <span
-          className={classNames(
-            "inline-block text-center whitespace-nowrap",
-            danger ? "text-red-600" : "",
-            primary ? "text-white" : "",
-            success ? "text-white" : "",
-            medium ? "font-medium" : "",
-            bold ? "font-bold" : "",
-            textClass
-          )}
-        >
-          {label}
-        </span>
+        {label && (
+          <span
+            className={classNames(
+              "inline-block text-center whitespace-nowrap",
+              danger ? "text-white" : "",
+              primary ? "text-white" : "",
+              success ? "text-white" : "",
+              medium ? "font-medium" : "",
+              bold ? "font-bold" : "",
+              textClass
+            )}
+          >
+            {label}
+          </span>
+        )}
         {iconPlacement === "right" && icon && (
           <span className={iconClass}>{icon}</span>
         )}
@@ -95,19 +97,21 @@ export default function Button({
       {iconPlacement === "left" && icon && (
         <span className={iconClass}>{icon}</span>
       )}
-      <span
-        className={classNames(
-          "inline-block text-center whitespace-nowrap",
-          danger ? "text-red-600" : "",
-          primary ? "text-white" : "",
-          success ? "text-white" : "",
-          medium ? "font-medium" : "",
-          bold ? "font-bold" : "",
-          textClass
-        )}
-      >
-        {label}
-      </span>
+      {label && (
+        <span
+          className={classNames(
+            "inline-block text-center whitespace-nowrap",
+            danger ? "text-white" : "",
+            primary ? "text-white" : "",
+            success ? "text-white" : "",
+            medium ? "font-medium" : "",
+            bold ? "font-bold" : "",
+            textClass
+          )}
+        >
+          {label}
+        </span>
+      )}
       {iconPlacement === "right" && icon && (
         <span className={iconClass}>{icon}</span>
       )}
